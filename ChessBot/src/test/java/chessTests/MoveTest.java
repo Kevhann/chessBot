@@ -25,8 +25,8 @@ public class MoveTest {
 
     static Chessboard chessboard = new Chessboard();
     Square[][] board = chessboard.getBoard();
-    Move legalWhiteMove = new Move("a7,a6");
-    Move legalBlackMove = new Move("b2,b3");
+    Move legalWhiteMove = new Move("a2,a3");
+    Move legalBlackMove = new Move("b7,b6");
 
     @BeforeClass
     public static void setUpClass() {

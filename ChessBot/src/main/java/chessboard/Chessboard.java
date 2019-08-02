@@ -59,7 +59,7 @@ public class Chessboard {
 
     public void printBoard() {
         for (int i = 0; i < 8; i++) {
-            System.out.print("\n" + (i + 1) + "  ");
+            System.out.print("\n" + (8 - i) + "  ");
             for (int j = 0; j < 8; j++) {
                 System.out.print(board[i][j]);
             }
@@ -115,7 +115,7 @@ public class Chessboard {
         board = new Square[8][8];
     }
     public void addPiece(Piece piece, String place) {
-        int rank = Character.getNumericValue(place.charAt(1)) - 1;
+        int rank = 8 - Character.getNumericValue(place.charAt(1));
         int file = place.charAt(0) - 97;
         board[rank][file].setCurrentPiece(piece);
     }

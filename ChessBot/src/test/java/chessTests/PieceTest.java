@@ -59,11 +59,11 @@ public class PieceTest {
     @Test
     public void pawnsCanMoveOnlyInCorrectDirection() {
 
-        Move legalWhiteMove = new Move("g7,g6");
-        Move legalBlackMove = new Move("b2,b3");
+        Move legalWhiteMove = new Move("g2,g3");
+        Move legalBlackMove = new Move("b7,b6");
 
-        Move illegalWhiteMove1 = new Move("g6,g7");
-        Move illegalBlackMove1 = new Move("b3,c3");
+        Move illegalWhiteMove1 = new Move("g3,g2");
+        Move illegalBlackMove1 = new Move("b6,b7");
 
         Move illegalWhiteMove2 = new Move("g6,h6");
         Move illegalBlackMove2 = new Move("b3,a3");
@@ -85,10 +85,10 @@ public class PieceTest {
 
     @Test
     public void pawnsCanMoveTwoSquaresOnFirstMoveOnly() {
-        Move wJump1 = new Move("h7,h5");
-        Move wJump2 = new Move("h5,h3");
-        Move bJump1 = new Move("b2,b4");
-        Move bJump2 = new Move("b4,b6");
+        Move wJump1 = new Move("h2,h4");
+        Move wJump2 = new Move("h4,h6");
+        Move bJump1 = new Move("b7,b5");
+        Move bJump2 = new Move("b5,b3");
 
         assertEquals(MoveType.VALID, wPawn.isLegalMove(wJump1));
         assertEquals(MoveType.VALID, bPawn.isLegalMove(bJump1));
@@ -103,11 +103,11 @@ public class PieceTest {
     @Test
     public void pawnsCanMoveDiagonallyWhenCapturing() {
         
-        Move whiteCaptures = new Move("b7,c6");
-        Move blackCaptures = new Move("c6,b7");
+        Move whiteCaptures = new Move("b3,c4");
+        Move blackCaptures = new Move("c7,b6");
         
-        board.addPiece(wPawn, "b7");
-        board.addPiece(bPawn,"c6");
+        board.addPiece(wPawn, "b6");
+        board.addPiece(bPawn,"c4");
         
         assertEquals(MoveType.CAPTURE, wPawn.isLegalMove(whiteCaptures));
         assertEquals(MoveType.CAPTURE, bPawn.isLegalMove(blackCaptures));

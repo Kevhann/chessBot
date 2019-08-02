@@ -16,9 +16,9 @@ public class Move {
     public int toFile;
 
     public Move(String move) {
-        this.fromRank = Character.getNumericValue(move.charAt(1)) - 1;
+        this.fromRank = 8 - Character.getNumericValue(move.charAt(1));
         this.fromFile = move.charAt(0) - 97;
-        this.toRank =  Character.getNumericValue(move.charAt(4)) - 1;
+        this.toRank =  8 - Character.getNumericValue(move.charAt(4));
         this.toFile = move.charAt(3) - 97;
     }
 
