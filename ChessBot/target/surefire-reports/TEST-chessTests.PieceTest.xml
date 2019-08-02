@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="11" failures="0" name="chessTests.PieceTest" time="0.006" errors="0" skipped="0">
+<testsuite tests="11" failures="0" name="chessTests.PieceTest" time="0" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="11.0.2+9-LTS"/>
@@ -63,13 +63,13 @@
   </properties>
   <testcase classname="chessTests.PieceTest" name="rooksCanMoveHorizontally" time="0"/>
   <testcase classname="chessTests.PieceTest" name="knightsCanMoveOverPieces" time="0"/>
-  <testcase classname="chessTests.PieceTest" name="bishopsCannotMoveOverPieces" time="0.003"/>
+  <testcase classname="chessTests.PieceTest" name="bishopsCannotMoveOverPieces" time="0"/>
   <testcase classname="chessTests.PieceTest" name="pawnsCanMoveTwoSquaresOnFirstMoveOnly" time="0"/>
   <testcase classname="chessTests.PieceTest" name="rooksCannotMoveOverPieces" time="0"/>
   <testcase classname="chessTests.PieceTest" name="pawnsCanMoveOnlyInCorrectDirection" time="0"/>
   <testcase classname="chessTests.PieceTest" name="bishopsCanMoveDiagonally" time="0"/>
   <testcase classname="chessTests.PieceTest" name="bishopsCannotMoveVerticallyOrHorizontally" time="0"/>
   <testcase classname="chessTests.PieceTest" name="rooksCannotMoveDiagonally" time="0"/>
-  <testcase classname="chessTests.PieceTest" name="pawnsCanMoveDiagonallyWhenCapturing" time="0.003"/>
+  <testcase classname="chessTests.PieceTest" name="pawnsCanMoveDiagonallyWhenCapturing" time="0"/>
   <testcase classname="chessTests.PieceTest" name="rooksCanMoveVertically" time="0"/>
 </testsuite>

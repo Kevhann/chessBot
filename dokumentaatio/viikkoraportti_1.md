@@ -1,10 +1,10 @@
-## Viikkoraportti
+## Viikkoraportti 1
 
 Tällä viikolla suurimman osan ajastani käytin aiheen miettimiseen. Harkitsin pitkään tekeväni projektin sudokun eri ratkaisualgoritmeista, mutta päätin lopulta sitä vastaan.
 
 Itse ohjelma ei ole edistynyt vielä tällä viikolla.
 
-Opin huomattavan verran sudokuun liittyvistä algoritmeista, vaikken ymmärtänyt niitä kaikkia alkuunkaan. Selvitin myös jonkin verran shakin ratkaisualgoritmeista, sekä shakin historiasta. 
+Opin huomattavan verran sudokuun liittyvistä algoritmeista, vaikken ymmärtänyt niitä kaikkia alkuunkaan. Selvitin myös jonkin verran shakin ratkaisualgoritmeista, sekä shakin historiasta.
 
 Vaikeuksia tuotti aiheen hankaluuden arvioiminen. Haluan haastaa itseäni sopivassa määrin, mutta haluan aiheen, jonka saa (suhteellisen) helposti aloitettua eikä jätä heti jumiin.
 
