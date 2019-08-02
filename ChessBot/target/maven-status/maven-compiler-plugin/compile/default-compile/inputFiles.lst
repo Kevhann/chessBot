@@ -1,0 +1,16 @@
+/home/kevin/tkt/chessBot/ChessBot/src/main/java/com/mycompany/chessbot/Main.java
+/home/kevin/tkt/chessBot/ChessBot/src/main/java/chessboard/IllegalMoveException.java
+/home/kevin/tkt/chessBot/ChessBot/src/main/java/pieces/Colour.java
+/home/kevin/tkt/chessBot/ChessBot/src/main/java/pieces/Knight.java
+/home/kevin/tkt/chessBot/ChessBot/src/main/java/pieces/Queen.java
+/home/kevin/tkt/chessBot/ChessBot/src/main/java/pieces/Bishop.java
+/home/kevin/tkt/chessBot/ChessBot/src/main/java/chessboard/Square.java
+/home/kevin/tkt/chessBot/ChessBot/src/main/java/pieces/PieceType.java
+/home/kevin/tkt/chessBot/ChessBot/src/main/java/pieces/Rook.java
+/home/kevin/tkt/chessBot/ChessBot/src/main/java/pieces/King.java
+/home/kevin/tkt/chessBot/ChessBot/src/main/java/chessboard/Chessboard.java
+/home/kevin/tkt/chessBot/ChessBot/src/main/java/pieces/Piece.java
+/home/kevin/tkt/chessBot/ChessBot/src/main/java/chessboard/GameIO.java
+/home/kevin/tkt/chessBot/ChessBot/src/main/java/chessboard/Move.java
+/home/kevin/tkt/chessBot/ChessBot/src/main/java/pieces/Pawn.java
+/home/kevin/tkt/chessBot/ChessBot/src/main/java/chessboard/MoveType.java
