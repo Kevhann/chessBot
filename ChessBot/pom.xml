@@ -33,6 +33,16 @@
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
                 <version>1.1.8</version>
+                <configuration>
+                    <targetClasses>
+                        <param>chessboard.*</param>
+                        <param>pieces.*</param>
+                    </targetClasses>
+                    <targetTests>
+                        <param>chessboard.*</param>
+                        <param>pieces.*</param>
+                    </targetTests>
+                </configuration>
             </plugin>
         </plugins>
     </build>

@@ -5,7 +5,7 @@
  */
 package chessboard;
 
-import pieces.Colour;
+import utils.Colour;
 import pieces.Piece;
 
 /**
@@ -14,7 +14,7 @@ import pieces.Piece;
  */
 public class Square {
 
-    private Colour side;
+    private final Colour side;
     public int file;
     public int rank;
     private Piece currentPiece;

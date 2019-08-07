@@ -1,3 +1,4 @@
-chessTests/MoveTest.class
-chessTests/ChessBoardTest.class
-chessTests/PieceTest.class
+chessboard/MoveTest.class
+chessboard/CheckTest.class
+chessboard/ChessBoardTest.class
+pieces/PieceTest.class

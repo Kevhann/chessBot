@@ -5,16 +5,17 @@
  */
 package pieces;
 
+import utils.Colour;
 import chessboard.Chessboard;
 import chessboard.Move;
-import chessboard.MoveType;
+import utils.MoveType;
 
 /**
  *
  * @author kevin
  */
 public class Queen extends Piece {
-    
+
     public Queen(Colour colour, Chessboard board) {
         super(colour, PieceType.QUEEN, board);
     }
@@ -25,10 +26,66 @@ public class Queen extends Piece {
         int fromFile = move.getFromFile();
         int toRank = move.getToRank();
         int toFile = move.getToFile();
-        
+
         int dRank = toRank - fromRank;
         int dFile = toFile - fromFile;
-        
-        return MoveType.VALID;
+
+        int rankDir = 1;
+        int fileDir = 1;
+
+        if (dRank < 0) {
+            rankDir = -1;
+        }
+
+        if (dFile < 0) {
+            fileDir = -1;
+        }
+
+        if (dRank == dFile || dRank == -dFile) {
+            for (int i = 1, j = 1; i < dRank * rankDir && j < dFile * fileDir; i++, j++) {
+                if (board.pieceOnBoard(fromRank + (i * rankDir), fromFile + (j * fileDir)) != null) {
+                    return MoveType.ILLEGAL;
+                }
+            }
+            Piece target = board.pieceOnBoard(toRank, toFile);
+            if (target == null) {
+                return MoveType.VALID;
+            } else if (target.side != this.side) {
+                return MoveType.CAPTURE;
+            }
+        } else if (dRank == 0 && dFile != 0) {
+
+            for (int i = 1; i < dFile * fileDir; i++) {
+                if (board.pieceOnBoard(fromRank, fromFile + (i * fileDir)) != null) {
+                    return MoveType.ILLEGAL;
+                }
+            }
+            Piece target = board.pieceOnBoard(toRank, toFile);
+            if (target == null) {
+                return MoveType.VALID;
+            } else if (target.side != this.side) {
+                return MoveType.CAPTURE;
+            } else {
+                return MoveType.ILLEGAL;
+            }
+
+        } else if (dRank != 0 && dFile == 0) {
+            for (int i = 1; i < dRank * rankDir; i++) {
+                if (board.pieceOnBoard(fromRank + (i * rankDir), fromFile) != null) {
+                    return MoveType.ILLEGAL;
+                }
+            }
+            Piece target = board.pieceOnBoard(toRank, toFile);
+            if (target == null) {
+                return MoveType.VALID;
+            } else if (target.side != this.side) {
+                return MoveType.CAPTURE;
+            } else {
+                return MoveType.ILLEGAL;
+            }
+        }
+
+        return MoveType.ILLEGAL;
+
     }
 }

@@ -5,9 +5,10 @@
  */
 package pieces;
 
+import utils.Colour;
 import chessboard.Chessboard;
 import chessboard.Move;
-import chessboard.MoveType;
+import utils.MoveType;
 
 /**
  *
@@ -41,9 +42,7 @@ public class Bishop extends Piece {
         }
 
         if (dRank == dFile || dRank == -dFile) {
-            System.out.println("rankDir: " + rankDir + ", fileDir: " + fileDir);
             for (int i = 1, j = 1; i < dRank * rankDir && j < dFile * fileDir; i++, j++) {
-                System.out.println("i: " + i + ", j: " + j);
                 if (board.pieceOnBoard(fromRank + (i * rankDir),fromFile + (j * fileDir)) != null) {
                     return MoveType.ILLEGAL;
                 }

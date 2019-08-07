@@ -5,10 +5,11 @@
  */
 package pieces;
 
+import utils.Colour;
 import chessboard.Chessboard;
-import chessboard.IllegalMoveException;
+import utils.IllegalMoveException;
 import chessboard.Move;
-import chessboard.MoveType;
+import utils.MoveType;
 
 /**
  *
@@ -43,18 +44,24 @@ public class Pawn extends Piece {
             dRank *= -1;
         }
 
-        if (fromFile == toFile) {
+        Piece target = board.pieceOnBoard(toRank, toFile);
+        if (dFile == 0) {
             if (dRank == 1) {
                 enpassant = false;
+                if (target != null) {
+                    return MoveType.ILLEGAL;
+                }
                 return MoveType.VALID;
             } else if (dRank == 2 && moveCount == 0) {
+                if (target != null) {
+                    return MoveType.ILLEGAL;
+                }
                 enpassant = true;
                 return MoveType.VALID;
             }
         }
         if ((dFile == 1 || dFile == -1) && dRank == 1) {
             System.out.println(this.side);
-            Piece target = board.pieceOnBoard(toRank, toFile);
             if (target == null) {
                 int checker = this.side == Colour.WHITE ? 1 : -1;
                 Piece enpassantPiece = board.pieceOnBoard(toRank + checker, toFile);

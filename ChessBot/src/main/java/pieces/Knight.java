@@ -5,9 +5,10 @@
  */
 package pieces;
 
+import utils.Colour;
 import chessboard.Chessboard;
 import chessboard.Move;
-import chessboard.MoveType;
+import utils.MoveType;
 
 /**
  *

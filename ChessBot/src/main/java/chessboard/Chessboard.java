@@ -5,8 +5,10 @@
  */
 package chessboard;
 
+import utils.IllegalMoveException;
+import utils.MoveType;
 import pieces.*;
-import pieces.Colour;
+import utils.Colour;
 
 /**
  *
@@ -16,6 +18,8 @@ public class Chessboard {
 
     private final String[] files = {"   ", " a ", " b ", " c ", " d ", " e ", " f ", " g ", " h "};
     private Square[][] board;
+    private Check check = new Check(this);
+    
 
     public Chessboard() {
         this.board = new Square[8][8];
@@ -70,6 +74,8 @@ public class Chessboard {
         }
         System.out.println("");
     }
+    
+   
 
     public void move(Move move, Colour turn) throws IllegalMoveException {
         int fromRank = move.getFromRank();
@@ -93,6 +99,11 @@ public class Chessboard {
             case ILLEGAL:
                 throw new IllegalMoveException("Unvalid Move");
             default:
+                if (currentPiece.type == PieceType.KING) {
+                    if (check.isChallenged(toRank, toFile, currentPiece.side)) {
+                        throw new IllegalMoveException("King cannot move");
+                    }
+                }
                 currentPiece.incrementMoveCounter();
 
                 Square targetSquare = board[toRank][toFile];
@@ -104,6 +115,9 @@ public class Chessboard {
     }
 
     public Piece pieceOnBoard(int rank, int file) {
+        if (rank < 0 || rank > 7 || file < 0 || file > 7) {
+            return null;
+        }
         return board[rank][file].getCurrentPiece();
     }
 

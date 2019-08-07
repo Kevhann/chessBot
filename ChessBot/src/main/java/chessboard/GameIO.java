@@ -5,8 +5,9 @@
  */
 package chessboard;
 
+import utils.IllegalMoveException;
 import java.util.Scanner;
-import pieces.Colour;
+import utils.Colour;
 
 /**
  *
