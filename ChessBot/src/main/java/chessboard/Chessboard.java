@@ -69,7 +69,7 @@ public class Chessboard {
             board[8 + i] = 6;
             board[48 + i] = -6;
         }
-        
+
     }
 
     public void printBoard() {
@@ -210,14 +210,16 @@ public class Chessboard {
     }
 
     public void cpMove(Move move, byte turn) {
-        byte from = move.getFrom64();
+        byte fromRank = move.fromRank;
+        byte fromFile = move.fromFile;
+        byte toRank = move.toRank;
+        byte toFile = move.toFile;
         byte to = move.getTo64();
-
+        byte from = move.getFrom64();
         byte piece = board[from];
-
         if (piece == 1) {
             whiteKing.setPos(to);
-        } else {
+        } else if (piece == -1) {
             blackKing.setPos(to);
         }
         board[from] = 0;

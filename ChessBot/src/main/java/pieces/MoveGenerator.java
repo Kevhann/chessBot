@@ -37,21 +37,21 @@ public class MoveGenerator {
                 int rank = i / 8;
                 int file = i - (rank * 8);
                 switch (type) {
-//                    case 1:
-//                        state = king(rank, file, side);
-//                        break;
-//                    case 2:
-//                        state = queen(rank, file, side);
-//                        break;
-//                    case 3:
-//                        state = bishop(rank, file, side);
-//                        break;
-//                    case 4:
-//                        state = knight(rank, file, side);
-//                        break;
-//                    case 5:
-//                        state = rook(rank, file, side);
-//                        break;
+                    case 1:
+                        state = king(rank, file, side);
+                        break;
+                    case 2:
+                        state = queen(rank, file, side);
+                        break;
+                    case 3:
+                        state = bishop(rank, file, side);
+                        break;
+                    case 4:
+                        state = knight(rank, file, side);
+                        break;
+                    case 5:
+                        state = rook(rank, file, side);
+                        break;
                     case 6:
                         state = pawn(rank, file, side);
                         break;
@@ -60,16 +60,13 @@ public class MoveGenerator {
             }
         }
         int size = states.size();
-        System.out.println("size: " + size);
         for (int i = size - 1; i >= 0; i--) {
             State s = states.get(i);
             Position king = s.kingPos(side);
             byte rank = king.getRank();
             byte file = king.getFile();
-            System.out.println("King rank: " + rank + ", file: " + file);
             if (check.isChallenged(s.board, rank, file, side)) {
                 states.remove(i);
-                System.out.println("removed");
             }
         }
         return states;
@@ -522,6 +519,7 @@ public class MoveGenerator {
 
         }
         if (rank < 7 || rank > 0) {
+            
             piece = board.pieceOnBoard(rank + side, file);
             if (piece == 0) {
                 state = new State(board.getBoardState());

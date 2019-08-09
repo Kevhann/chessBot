@@ -56,20 +56,17 @@ public class GameIO {
                 }
             } else if (turn == -1) {
                 System.out.println("Black to move");
-//                if (check.isChallenged(board.getBoardState(), turn)) {
-//                    System.out.println("Black in check!");
-//                    
-//                }
+                if (check.isChallenged(board.getBoardState(), turn)) {
+                    System.out.println("Black in check!");
+                    
+                }
+                
                 ArrayList<State> states = gen.getAll(turn);
 
                 if (states.isEmpty()) {
                     System.out.println("Checkmate!!");
                 }
-                Collections.sort(states);
-                for (int i = 0; i < states.size(); i++) {
-                    board.printState(states.get(i).board);
-                }
-                
+                Collections.sort(states);                
                 board.cpMove(states.get(0).move, (byte) -1);
                 turn *= -1;
             }
