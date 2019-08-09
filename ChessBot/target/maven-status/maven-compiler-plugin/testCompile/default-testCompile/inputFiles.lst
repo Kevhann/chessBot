@@ -1,4 +1,5 @@
 /home/kevin/tkt/chessBot/ChessBot/src/test/java/chessboard/CheckTest.java
-/home/kevin/tkt/chessBot/ChessBot/src/test/java/pieces/PieceTest.java
 /home/kevin/tkt/chessBot/ChessBot/src/test/java/chessboard/ChessBoardTest.java
 /home/kevin/tkt/chessBot/ChessBot/src/test/java/chessboard/MoveTest.java
+/home/kevin/tkt/chessBot/ChessBot/src/test/java/pieces/MoveGeneratorTest.java
+/home/kevin/tkt/chessBot/ChessBot/src/test/java/pieces/MoveCheckerTest.java

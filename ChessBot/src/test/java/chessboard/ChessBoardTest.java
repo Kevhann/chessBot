@@ -5,7 +5,6 @@
  */
 package chessboard;
 
-import chessboard.*;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import org.junit.After;
@@ -26,27 +25,23 @@ public class ChessBoardTest {
     private final PrintStream originalOut = System.out;
     private final PrintStream originalErr = System.err;
 
-    static Chessboard chessboard = new Chessboard();
-    Square[][] board = chessboard.getBoard();
+    static Chessboard board = new Chessboard();
 
     public ChessBoardTest() {
     }
 
     @BeforeClass
     public static void setUpClass() {
-        chessboard.initializeBoard();
-        chessboard.addPieces();
+        board.addPieces();
     }
 
     @AfterClass
     public static void tearDownClass() {
     }
 
-   
-
     @Before
     public void setUp() {
-        
+
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
     }
@@ -60,23 +55,21 @@ public class ChessBoardTest {
 
     @Test
     public void chessBoardHasCorrectDimensions() {
-        assertEquals(8, board[0].length);
-        assertEquals(8, board.length);
+        assertEquals(64, board.getBoard().length);
     }
 
     @Test
     public void chessBoardIsInitializedCorrectly() {
         String expected = "\n8   ♜  ♞  ♝  ♛  ♚  ♝  ♞  ♜ \n"
                 + "7   ♟  ♟  ♟  ♟  ♟  ♟  ♟  ♟ \n"
-                + "6      #     #     #     # \n"
-                + "5   #     #     #     #    \n"
-                + "4      #     #     #     # \n"
-                + "3   #     #     #     #    \n"
+                + "6                          \n"
+                + "5                          \n"
+                + "4                          \n"
+                + "3                          \n"
                 + "2   ♙  ♙  ♙  ♙  ♙  ♙  ♙  ♙ \n"
                 + "1   ♖  ♘  ♗  ♕  ♔  ♗  ♘  ♖ \n"
-                + "\n"
                 + "    a  b  c  d  e  f  g  h \n";
-        chessboard.printBoard();
+        board.printBoard();
         assertEquals(expected, outContent.toString());
     }
 

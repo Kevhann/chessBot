@@ -1,4 +1,5 @@
 chessboard/MoveTest.class
+pieces/MoveCheckerTest.class
 chessboard/CheckTest.class
+pieces/MoveGeneratorTest.class
 chessboard/ChessBoardTest.class
-pieces/PieceTest.class

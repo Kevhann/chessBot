@@ -8,7 +8,7 @@ package chessboard;
 import utils.IllegalMoveException;
 import utils.MoveType;
 import pieces.*;
-import utils.Colour;
+import utils.Position;
 
 /**
  *
@@ -16,80 +16,121 @@ import utils.Colour;
  */
 public class Chessboard {
 
+    private final MoveChecker checker = new MoveChecker(this);
     private final String[] files = {"   ", " a ", " b ", " c ", " d ", " e ", " f ", " g ", " h "};
-    private Square[][] board;
-    private Check check = new Check(this);
-    
+    private final String[] symbols = {" ♟ ", " ♜ ", " ♞ ", " ♝ ", " ♛ ", " ♚ ", "   ", " ♔ ", " ♕ ", " ♗ ", " ♘ ", " ♖ ", " ♙ "};
+    private Check check = new Check();
+    private byte[] board;
+    private State current;
+    private byte[] castle;
+    public Position blackKing;
+    public Position whiteKing;
+    public boolean whiteCheck;
+    public boolean blackCheck;
 
+    /**
+     * <pre>
+     * The board representing the chessboard.
+     * board[0] is bottom left (a1), board[63] top right (h8)
+     * positive for white, negative for black
+     * 1 for King
+     * 2 for Queen
+     * 3 for Bishop
+     * 4 for Knight
+     * 5 for Rook
+     * 6 for Pawn
+     * </pre>
+     */
     public Chessboard() {
-        this.board = new Square[8][8];
-    }
-
-    public void initializeBoard() {
-        Colour colour = Colour.WHITE;
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                board[i][j] = new Square(colour, i, j);
-                colour = colour == Colour.WHITE ? Colour.BLACK : Colour.WHITE;
-            }
-            colour = colour == Colour.WHITE ? Colour.BLACK : Colour.WHITE;
-        }
+        this.current = new State(new byte[64]);
+        this.board = current.getBoard();
+        this.whiteKing = new Position("e1");
+        this.blackKing = new Position("e8");
     }
 
     public void addPieces() {
+        board[0] = 5;
+        board[7] = 5;
+        board[63] = -5;
+        board[56] = -5;
+        board[1] = 4;
+        board[6] = 4;
+        board[62] = -4;
+        board[57] = -4;
+        board[2] = 3;
+        board[5] = 3;
+        board[61] = -3;
+        board[58] = -3;
+        board[3] = 2;
+        board[59] = -2;
+        board[4] = 1;
+        board[60] = -1;
         for (int i = 0; i < 8; i++) {
-            board[1][i].setPiece(new Pawn(Colour.BLACK, this));
-            board[6][i].setPiece(new Pawn(Colour.WHITE, this));
+            board[8 + i] = 6;
+            board[48 + i] = -6;
         }
-        board[0][0].setPiece(new Rook(Colour.BLACK, this));
-        board[0][7].setPiece(new Rook(Colour.BLACK, this));
-        board[0][1].setPiece(new Knight(Colour.BLACK, this));
-        board[0][6].setPiece(new Knight(Colour.BLACK, this));
-        board[0][2].setPiece(new Bishop(Colour.BLACK, this));
-        board[0][5].setPiece(new Bishop(Colour.BLACK, this));
-        board[0][4].setPiece(new King(Colour.BLACK, this));
-        board[0][3].setPiece(new Queen(Colour.BLACK, this));
-
-        board[7][0].setPiece(new Rook(Colour.WHITE, this));
-        board[7][7].setPiece(new Rook(Colour.WHITE, this));
-        board[7][1].setPiece(new Knight(Colour.WHITE, this));
-        board[7][6].setPiece(new Knight(Colour.WHITE, this));
-        board[7][2].setPiece(new Bishop(Colour.WHITE, this));
-        board[7][5].setPiece(new Bishop(Colour.WHITE, this));
-        board[7][4].setPiece(new King(Colour.WHITE, this));
-        board[7][3].setPiece(new Queen(Colour.WHITE, this));
-
+        
     }
 
     public void printBoard() {
-        for (int i = 0; i < 8; i++) {
-            System.out.print("\n" + (8 - i) + "  ");
+        System.out.println("");
+        for (int i = 7; i >= 0; i--) {
+            System.out.print(i + 1 + "  ");
             for (int j = 0; j < 8; j++) {
-                System.out.print(board[i][j]);
+                System.out.print(symbols[board[(8 * i) + j] + 6]);
             }
+            System.out.println("");
         }
-        System.out.print("\n\n");
         for (int i = 0; i < 9; i++) {
             System.out.print(files[i]);
         }
         System.out.println("");
     }
-    
-   
 
-    public void move(Move move, Colour turn) throws IllegalMoveException {
-        int fromRank = move.getFromRank();
-        int fromFile = move.getFromFile();
-        int toRank = move.getToRank();
-        int toFile = move.getToFile();
+    public void move(Move move, byte turn) throws IllegalMoveException {
+        byte fromRank = move.getFromRank();
+        byte fromFile = move.getFromFile();
+        byte toRank = move.getToRank();
+        byte toFile = move.getToFile();
 
-        Square currentSquare = board[fromRank][fromFile];
-        Piece currentPiece = currentSquare.getCurrentPiece();
-        if (currentPiece == null || currentPiece.side != turn) {
+        byte currentPiece = board[(fromRank * 8) + fromFile];
+        int piecetype = currentPiece * turn;
+        if (piecetype <= 0) {
             throw new IllegalMoveException("Illegal move");
         }
-        MoveType moveType = currentPiece.isLegalMove(move);
-        
+
+        MoveType moveType;
+
+        switch (piecetype) {
+            case 1:
+                moveType = checker.king(move, turn);
+                break;
+            case 2:
+                moveType = checker.queen(move, turn);
+                break;
+
+            case 3:
+                moveType = checker.bishop(move, turn);
+                break;
+
+            case 4:
+                moveType = checker.knight(move, turn);
+                break;
+
+            case 5:
+                moveType = checker.rook(move, turn);
+                break;
+
+            case 6:
+                moveType = checker.pawn(move, turn);
+                break;
+
+            default:
+                System.out.println("switch case default");
+                moveType = MoveType.ILLEGAL;
+
+        }
+
         System.out.println("Movetype: " + moveType);
 
         switch (moveType) {
@@ -99,42 +140,102 @@ public class Chessboard {
             case ILLEGAL:
                 throw new IllegalMoveException("Unvalid Move");
             default:
-                if (currentPiece.type == PieceType.KING) {
-                    if (check.isChallenged(toRank, toFile, currentPiece.side)) {
+                if (piecetype == 1) {
+                    if (check.isChallenged(board, toRank, toFile, turn)) {
                         throw new IllegalMoveException("King cannot move");
+                    } else {
+                        if (turn == 1) {
+                            whiteKing.setPos(toRank, toFile);
+                        } else {
+                            blackKing.setPos(toRank, toFile);
+                        }
                     }
+
                 }
-                currentPiece.incrementMoveCounter();
+                board[(fromRank * 8) + fromFile] = 0;
+                board[(toRank * 8) + toFile] = currentPiece;
 
-                Square targetSquare = board[toRank][toFile];
-                Piece targetPiece = targetSquare.getCurrentPiece();
-                targetSquare.setPiece(currentPiece);
-                currentSquare.removePiece();
         }
-
     }
 
-    public Piece pieceOnBoard(int rank, int file) {
+    public byte pieceOnBoard(int rank, int file) {
         if (rank < 0 || rank > 7 || file < 0 || file > 7) {
-            return null;
+            return 0;
         }
-        return board[rank][file].getCurrentPiece();
+        return board[(rank * 8) + file];
     }
 
-    public Square[][] getBoard() {
+    public byte pieceOnBoard(String place) {
+        int rank = Character.getNumericValue(place.charAt(1)) - 1;
+        int file = place.charAt(0) - 97;
+        return board[(rank * 8) + file];
+    }
+
+    public byte pieceOnBoard(int index) {
+        return board[index];
+    }
+
+    public byte[] getBoard() {
         return board;
     }
 
-    public void clearBoard() {
-        board = new Square[8][8];
+    public State getBoardState() {
+        byte[] state = board.clone();
+        return new State(state, whiteKing, blackKing);
     }
-    public void addPiece(Piece piece, String place) {
-        int rank = 8 - Character.getNumericValue(place.charAt(1));
-        int file = place.charAt(0) - 97;
-        board[rank][file].setCurrentPiece(piece);
-    }
-//    public void addPiece(Piece piece, int rank, int file) {
-//        board[rank][file].setCurrentPiece(piece);
-//    }
 
+    public void printState(byte[] state) {
+        System.out.println("");
+        for (int i = 7; i >= 0; i--) {
+            System.out.print(i + 1 + "  ");
+            for (int j = 0; j < 8; j++) {
+                System.out.print(symbols[state[(8 * i) + j] + 6]);
+            }
+            System.out.println("");
+        }
+        for (int i = 0; i < 9; i++) {
+            System.out.print(files[i]);
+        }
+        System.out.println("");
+    }
+
+    public void clearBoard() {
+        board = new byte[64];
+        this.whiteKing = new Position("e1");
+        this.blackKing = new Position("e8");
+    }
+
+    public void setState(byte[] state) {
+        this.board = state;
+    }
+
+    public void cpMove(Move move, byte turn) {
+        byte from = move.getFrom64();
+        byte to = move.getTo64();
+
+        byte piece = board[from];
+
+        if (piece == 1) {
+            whiteKing.setPos(to);
+        } else {
+            blackKing.setPos(to);
+        }
+        board[from] = 0;
+        board[to] = piece;
+
+    }
+
+    public void addPiece(byte piece, String place) {
+        int rank = Character.getNumericValue(place.charAt(1)) - 1;
+        int file = place.charAt(0) - 97;
+        board[(rank * 8) + file] = piece;
+    }
+
+    public Position kingPos(byte side) {
+        if (side == 1) {
+            return whiteKing;
+        } else {
+            return blackKing;
+        }
+    }
 }

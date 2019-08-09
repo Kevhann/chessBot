@@ -13,7 +13,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import utils.Colour;
 
 /**
  *
@@ -24,8 +23,7 @@ public class MoveTest {
     public MoveTest() {
     }
 
-    static Chessboard chessboard = new Chessboard();
-    Square[][] board = chessboard.getBoard();
+    static Chessboard board = new Chessboard();
     Move legalWhiteMove = new Move("a2,a3");
     Move legalBlackMove = new Move("b7,b6");
 
@@ -39,36 +37,33 @@ public class MoveTest {
 
     @Before
     public void setUp() {
-        chessboard.initializeBoard();
-        chessboard.addPieces();
+        board.addPieces();
     }
 
     @After
     public void tearDown() {
-        
+        board.clearBoard();
     }
 
     @Test
     public void CorrectColourMoves() {
-        assertNull(board[5][0].getCurrentPiece());
+        assertEquals(0, (byte) board.pieceOnBoard("a3"));
         try {
-            chessboard.move(legalWhiteMove, Colour.WHITE);
+            board.move(legalWhiteMove, (byte) 1);
         } catch (IllegalMoveException e) {
         }
-        assertNotNull(board[5][0].getCurrentPiece());
-
+        assertEquals(6, (byte) board.pieceOnBoard("a3"));
     }
 
     @Test
     public void incorrectColourDoesNotMove() {
-        assertNull(board[5][0].getCurrentPiece());
+        assertEquals(0, (byte) board.pieceOnBoard("a3"));
         try {
-            chessboard.move(legalWhiteMove, Colour.BLACK);
+            board.move(legalBlackMove, (byte) 1);
         } catch (IllegalMoveException e) {
             System.out.println(e);
         }
-        assertNull(board[5][0].getCurrentPiece());
+        assertEquals(0, (byte) board.pieceOnBoard("a3"));
     }
-    
 
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="2" failures="0" name="chessboard.MoveTest" time="0.016" errors="0" skipped="0">
+<testsuite tests="12" failures="0" name="pieces.MoveGeneratorTest" time="0.001" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="11.0.2+9-LTS"/>
@@ -61,6 +61,16 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="chessboard.MoveTest" name="CorrectColourMoves" time="0.016"/>
-  <testcase classname="chessboard.MoveTest" name="incorrectColourDoesNotMove" time="0"/>
+  <testcase classname="pieces.MoveGeneratorTest" name="queenHas27MovesFromCentre" time="0"/>
+  <testcase classname="pieces.MoveGeneratorTest" name="black20MovesAtStart" time="0"/>
+  <testcase classname="pieces.MoveGeneratorTest" name="capturingWhitePawnHas3Moves" time="0"/>
+  <testcase classname="pieces.MoveGeneratorTest" name="white20MovesAtStart" time="0"/>
+  <testcase classname="pieces.MoveGeneratorTest" name="checkmateReturnsZeroMoves1" time="0"/>
+  <testcase classname="pieces.MoveGeneratorTest" name="kingInCenterHas8Moves" time="0"/>
+  <testcase classname="pieces.MoveGeneratorTest" name="knightInCenterHas8Moves" time="0"/>
+  <testcase classname="pieces.MoveGeneratorTest" name="pawnsInStartingPositionHaveTwoMoves" time="0"/>
+  <testcase classname="pieces.MoveGeneratorTest" name="knightInCornerHasTwoMoves" time="0"/>
+  <testcase classname="pieces.MoveGeneratorTest" name="capturingBlackPawnHas3Moves" time="0.001"/>
+  <testcase classname="pieces.MoveGeneratorTest" name="kingInCornerHas3Moves" time="0"/>
+  <testcase classname="pieces.MoveGeneratorTest" name="kingCannotMoveIntoChallengedSquares" time="0"/>
 </testsuite>
