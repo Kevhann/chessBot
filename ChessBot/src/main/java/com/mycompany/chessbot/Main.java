@@ -37,8 +37,13 @@ public class Main {
         Chessboard board = new Chessboard();
         MoveGenerator gen = new MoveGenerator(board);
         Check c = new Check();
-        
-        board.addPieces();
+
+//        board.addPieces();
+        board.addPiece((byte) -1, "d3");
+        board.addPiece((byte) 6, "c3");
+        board.addPiece((byte) 6, "e3");
+        board.addPiece((byte) 6, "d2");
+        board.setBlackKing(new Position("d3"));
 
 //        System.out.println("incheck: " + c.isChallenged(board.getBoard(), "c6", (byte) -1));
         ArrayList<State> states = new ArrayList();
@@ -50,7 +55,7 @@ public class Main {
         System.out.println("moves: " + states.size());
 
         for (int i = 0; i < states.size(); i++) {
-            System.out.println("Score: " + states.get(i).score);
+            System.out.println("Score: " + states.get(i).getScore((byte) 1));
             board.printState(states.get(i).board);
             System.out.println("---");
             System.out.println(states.get(i).move);

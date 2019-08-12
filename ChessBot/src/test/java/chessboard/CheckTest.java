@@ -44,8 +44,8 @@ public class CheckTest {
 
     @Test
     public void returnsFalseWithEmptyBoard() {
-        assertFalse(check.isChallenged(board.getBoard(), 0, 0, (byte) 1));
-        assertFalse(check.isChallenged(board.getBoard(), 0, 0, (byte) -1));
+        assertFalse(check.isChallenged(board.getBoard(), 6, 3, (byte) 1));
+        assertFalse(check.isChallenged(board.getBoard(), 4, 4, (byte) -1));
     }
 
     @Test
@@ -55,6 +55,11 @@ public class CheckTest {
         assertTrue(check.isChallenged(board.getBoard(), "c3", (byte) -1));
         assertFalse(check.isChallenged(board.getBoard(), "d3", (byte) -1));
         assertFalse(check.isChallenged(board.getBoard(), "e1", (byte) -1));
+        assertFalse(check.isChallenged(board.getBoard(), "e2", (byte) -1));
+        assertFalse(check.isChallenged(board.getBoard(), "c2", (byte) -1));
+        assertFalse(check.isChallenged(board.getBoard(), "e4", (byte) -1));
+        assertFalse(check.isChallenged(board.getBoard(), "c4", (byte) -1));
+        assertFalse(check.isChallenged(board.getBoard(), "d1", (byte) -1));
     }
 
     @Test
@@ -64,16 +69,22 @@ public class CheckTest {
         assertTrue(check.isChallenged(board.getBoard(), "c1", (byte) 1));
         assertFalse(check.isChallenged(board.getBoard(), "d1", (byte) 1));
         assertFalse(check.isChallenged(board.getBoard(), "e3", (byte) 1));
+        assertFalse(check.isChallenged(board.getBoard(), "e2", (byte) 1));
+        assertFalse(check.isChallenged(board.getBoard(), "c2", (byte) 1));
+        assertFalse(check.isChallenged(board.getBoard(), "e4", (byte) 1));
+        assertFalse(check.isChallenged(board.getBoard(), "c4", (byte) 1));
+        assertFalse(check.isChallenged(board.getBoard(), "d3", (byte) 1));
     }
 
-    @Test
-    public void pawnsDontChallengeSameColour() {
+
+@Test
+public void pawnsDontChallengeSameColour() {
         board.addPiece((byte) 6, "d2");
         assertFalse(check.isChallenged(board.getBoard(), "e3", (byte) 1));
     }
 
     @Test
-    public void knightsChallengeCorrectly() {
+public void knightsChallengeCorrectly() {
         board.addPiece((byte) 4, "d4");
         assertTrue(check.isChallenged(board.getBoard(), "e6", (byte) -1));
         assertTrue(check.isChallenged(board.getBoard(), "e2", (byte) -1));
@@ -86,7 +97,7 @@ public class CheckTest {
     }
 
     @Test
-    public void rooksChallengeCorrectly() {
+public void rooksChallengeCorrectly() {
         board.addPiece((byte) -5, "c2");
         assertTrue(check.isChallenged(board.getBoard(), "h2", (byte) 1));
         assertTrue(check.isChallenged(board.getBoard(), "c8", (byte) 1));
@@ -96,7 +107,7 @@ public class CheckTest {
     }
 
     @Test
-    public void rooksCannotChallengeThroughPieces() {
+public void rooksCannotChallengeThroughPieces() {
         board.addPiece((byte) -5, "c2");
         board.addPiece((byte) 1, "g2");
         board.addPiece((byte) 1, "c5");
@@ -105,7 +116,7 @@ public class CheckTest {
     }
 
     @Test
-    public void bishopsChallengeCorrectly() {
+public void bishopsChallengeCorrectly() {
         board.addPiece((byte) -3, "d5");
         assertTrue(check.isChallenged(board.getBoard(), "a2", (byte) 1));
         assertTrue(check.isChallenged(board.getBoard(), "g8", (byte) 1));
@@ -115,7 +126,7 @@ public class CheckTest {
     }
 
     @Test
-    public void bishopsCannotChallengeThroughPieces() {
+public void bishopsCannotChallengeThroughPieces() {
         board.addPiece((byte) -3, "d5");
         board.addPiece((byte) 5, "e4");
         board.addPiece((byte) 1, "e6");
@@ -128,7 +139,7 @@ public class CheckTest {
     }
 
     @Test
-    public void queensChallengeCorrectly1() {
+public void queensChallengeCorrectly1() {
         board.addPiece((byte) -2, "c2");
         assertTrue(check.isChallenged(board.getBoard(), "h2", (byte) 1));
         assertTrue(check.isChallenged(board.getBoard(), "c8", (byte) 1));
@@ -138,7 +149,7 @@ public class CheckTest {
     }
 
     @Test
-    public void queensCannotChallengeThroughPieces1() {
+public void queensCannotChallengeThroughPieces1() {
         board.addPiece((byte) -2, "c2");
         board.addPiece((byte) 1, "g2");
         board.addPiece((byte) 1, "c5");
@@ -147,7 +158,7 @@ public class CheckTest {
     }
 
     @Test
-    public void queensChallengeCorrectly2() {
+public void queensChallengeCorrectly2() {
         board.addPiece((byte) -2, "d5");
         assertTrue(check.isChallenged(board.getBoard(), "a2", (byte) 1));
         assertTrue(check.isChallenged(board.getBoard(), "g8", (byte) 1));
@@ -157,7 +168,7 @@ public class CheckTest {
     }
 
     @Test
-    public void queensCannotChallengeThroughPieces2() {
+public void queensCannotChallengeThroughPieces2() {
         board.addPiece((byte) -2, "d5");
         board.addPiece((byte) 5, "e4");
         board.addPiece((byte) 1, "e6");
@@ -170,7 +181,7 @@ public class CheckTest {
     }
 
     @Test
-    public void kingChallengesCorrectly() {
+public void kingChallengesCorrectly() {
         board.addPiece((byte) 1, "d4");
         assertTrue(check.isChallenged(board.getBoard(), "c3", (byte) -1));
         assertTrue(check.isChallenged(board.getBoard(), "c4", (byte) -1));
@@ -184,4 +195,6 @@ public class CheckTest {
         assertFalse(check.isChallenged(board.getBoard(), "e6", (byte) -1));
         assertFalse(check.isChallenged(board.getBoard(), "b4", (byte) -1));
     }
+    
+    
 }

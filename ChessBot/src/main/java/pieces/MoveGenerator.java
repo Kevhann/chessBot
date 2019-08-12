@@ -149,7 +149,7 @@ public class MoveGenerator {
                 state = new State(board.getBoardState());
                 state.setState((byte) rank, (byte) file, (byte) (rank - 1), (byte) file, (byte) side);
                 if (!check.isChallenged(state.board, rank - 1, file, side)) {
-                    state.getKingPos(side).setRank((byte) (rank + 1));
+                    state.setKingPos(side, new Position((byte) (rank - 1), (byte) (file)));
                     states.add(state);
 
                 }
@@ -160,7 +160,7 @@ public class MoveGenerator {
                     state = new State(board.getBoardState());
                     state.setState((byte) rank, (byte) file, (byte) (rank - 1), (byte) (file - 1), (byte) side);
                     if (!check.isChallenged(state.board, rank - 1, file - 1, side)) {
-                        state.getKingPos(side).setPos((byte) (rank - 1), (byte) (file - 1));
+                        state.setKingPos(side, new Position((byte) (rank - 1), (byte) (file - 1)));
                         states.add(state);
                     }
                 }
@@ -171,6 +171,7 @@ public class MoveGenerator {
                     state = new State(board.getBoardState());
                     state.setState((byte) rank, (byte) file, (byte) (rank - 1), (byte) (file + 1), (byte) side);
                     if (!check.isChallenged(state.board, rank - 1, file + 1, side)) {
+                        state.setKingPos(side, new Position((byte) (rank - 1), (byte) (file + 1)));
                         states.add(state);
                     }
                 }
@@ -182,6 +183,7 @@ public class MoveGenerator {
                 state = new State(board.getBoardState());
                 state.setState((byte) rank, (byte) file, (byte) (rank + 1), (byte) file, (byte) side);
                 if (!check.isChallenged(state.board, rank + 1, file, side)) {
+                    state.setKingPos(side, new Position((byte) (rank + 1), (byte) (file)));
                     states.add(state);
                 }
             }
@@ -191,6 +193,7 @@ public class MoveGenerator {
                     state = new State(board.getBoardState());
                     state.setState((byte) rank, (byte) file, (byte) (rank + 1), (byte) (file - 1), (byte) side);
                     if (!check.isChallenged(state.board, rank + 1, file - 1, side)) {
+                        state.setKingPos(side, new Position((byte) (rank + 1), (byte) (file - 1)));
                         states.add(state);
                     }
                 }
@@ -201,6 +204,7 @@ public class MoveGenerator {
                     state = new State(board.getBoardState());
                     state.setState((byte) rank, (byte) file, (byte) (rank + 1), (byte) (file + 1), (byte) side);
                     if (!check.isChallenged(state.board, rank + 1, file + 1, side)) {
+                        state.setKingPos(side, new Position((byte) (rank + 1), (byte) (file + 1)));
                         states.add(state);
                     }
                 }
@@ -212,6 +216,7 @@ public class MoveGenerator {
                 state = new State(board.getBoardState());
                 state.setState((byte) rank, (byte) file, (byte) rank, (byte) (file - 1), (byte) side);
                 if (!check.isChallenged(state.board, rank, file - 1, side)) {
+                    state.setKingPos(side, new Position((byte) (rank), (byte) (file - 1)));
                     states.add(state);
                 }
             }
@@ -222,6 +227,7 @@ public class MoveGenerator {
                 state = new State(board.getBoardState());
                 state.setState((byte) rank, (byte) file, (byte) rank, (byte) (file + 1), (byte) side);
                 if (!check.isChallenged(state.board, rank, file + 1, side)) {
+                    state.setKingPos(side, new Position((byte) (rank), (byte) (file + 1)));
                     states.add(state);
                 }
             }
@@ -500,65 +506,52 @@ public class MoveGenerator {
         byte piece;
         if (rank == 1 && side == 1) {
 
-            piece = board.pieceOnBoard(3, file);
-            if (piece == 0) {
+            byte piece1 = board.pieceOnBoard(2, file);
+            byte piece2 = board.pieceOnBoard(3, file);
+            if (piece1 == 0 && piece2 == 0) {
                 state = new State(board.getBoardState());
                 state.setState((byte) rank, (byte) file, (byte) (rank + 2), (byte) file, (byte) 6);
                 states.add(state);
-
             }
         }
         if (rank == 6 && side == -1) {
 
-            piece = board.pieceOnBoard(4, file);
-            if (piece == 0) {
+            byte piece1 = board.pieceOnBoard(5, file);
+            byte piece2 = board.pieceOnBoard(4, file);
+            if (piece1 == 0 && piece2 == 0) {
                 state = new State(board.getBoardState());
                 state.setState((byte) rank, (byte) file, (byte) (rank - 2), (byte) file, (byte) -6);
                 states.add(state);
             }
 
         }
-        if (rank < 7 || rank > 0) {
-            
-            piece = board.pieceOnBoard(rank + side, file);
-            if (piece == 0) {
-                state = new State(board.getBoardState());
+
+        piece = board.pieceOnBoard(rank + side, file);
+        if (piece == 0) {
+            state = new State(board.getBoardState());
+            if (rank == 7 || rank == 0) {
+//                state.setState((byte) rank, (byte) file, (byte) (rank + side), (byte) file, (byte) (side * 6));
+            } else {
                 state.setState((byte) rank, (byte) file, (byte) (rank + side), (byte) file, (byte) (side * 6));
-                states.add(state);
             }
+            states.add(state);
         }
-        if (rank < 7 && file < 7) {
-            piece = board.pieceOnBoard(rank + 1, file + 1);
-            if (piece * side < 0) {
-                state = new State(board.getBoardState());
-                state.setState((byte) rank, (byte) file, (byte) (rank + 1), (byte) (file + 1), (byte) 6);
-                states.add(state);
-            }
+
+        piece = board.pieceOnBoard(rank + side, file + 1);
+        if (piece * side < 0) {
+            state = new State(board.getBoardState());
+            state.setState((byte) rank, (byte) file, (byte) (rank + 1), (byte) (file + 1), (byte) (side * 6));
+            states.add(state);
         }
-        if (rank < 7 && file > 0) {
-            piece = board.pieceOnBoard(rank + 1, file - 1);
-            if (piece * side < 0) {
-                state = new State(board.getBoardState());
-                state.setState((byte) rank, (byte) file, (byte) (rank + 1), (byte) (file - 1), (byte) 6);
-                states.add(state);
-            }
+
+        piece = board.pieceOnBoard(rank + side, file - 1);
+        if (piece * side < 0) {
+            state = new State(board.getBoardState());
+            state.setState((byte) rank, (byte) file, (byte) (rank + 1), (byte) (file - 1), (byte) (side * 6));
+            states.add(state);
+
         }
-        if (rank > 0 && file < 7) {
-            piece = board.pieceOnBoard(rank - 1, file + 1);
-            if (piece * side < 0) {
-                state = new State(board.getBoardState());
-                state.setState((byte) rank, (byte) file, (byte) (rank - 1), (byte) (file + 1), (byte) -6);
-                states.add(state);
-            }
-        }
-        if (rank > 0 && file > 0) {
-            piece = board.pieceOnBoard(rank - 1, file - 1);
-            if (piece * side < 0) {
-                state = new State(board.getBoardState());
-                state.setState((byte) rank, (byte) file, (byte) (rank - 1), (byte) (file - 1), (byte) -6);
-                states.add(state);
-            }
-        }
+
         return states;
     }
 }

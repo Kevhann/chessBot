@@ -23,8 +23,8 @@ public class Chessboard {
     private byte[] board;
     private State current;
     private byte[] castle;
-    public Position blackKing;
-    public Position whiteKing;
+    private Position blackKing;
+    private Position whiteKing;
     public boolean whiteCheck;
     public boolean blackCheck;
 
@@ -240,4 +240,21 @@ public class Chessboard {
             return blackKing;
         }
     }
+
+    public Position getBlackKing() {
+        return blackKing;
+    }
+
+    public Position getWhiteKing() {
+        return whiteKing;
+    }
+
+    public void setBlackKing(Position blackKing) {
+        this.blackKing = blackKing;
+    }
+
+    public void setWhiteKing(Position whiteKing) {
+        this.whiteKing = whiteKing;
+    }
+    
 }
