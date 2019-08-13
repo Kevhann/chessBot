@@ -39,13 +39,16 @@ public class Main {
         Check c = new Check();
 
 //        board.addPieces();
-        board.addPiece((byte) -1, "d3");
-        board.addPiece((byte) 6, "c3");
-        board.addPiece((byte) 6, "e3");
-        board.addPiece((byte) 6, "d2");
-        board.setBlackKing(new Position("d3"));
+        board.addPiece((byte) -1, "g6");
+        board.addPiece((byte) 5, "a5");
 
-//        System.out.println("incheck: " + c.isChallenged(board.getBoard(), "c6", (byte) -1));
+        board.setBlackKing(new Position("g6"));
+
+        System.out.println("incheck g6: " + c.isChallenged(board.getBoard(), "g6", (byte) -1));
+        System.out.println("incheck g5: " + c.isChallenged(board.getBoard(), "g5", (byte) -1));
+        System.out.println("incheck g4: " + c.isChallenged(board.getBoard(), "g4", (byte) -1));
+        System.out.println("incheck f5: " + c.isChallenged(board.getBoard(), "f5", (byte) -1));
+        System.out.println("incheck h5: " + c.isChallenged(board.getBoard(), "h5", (byte) -1));
         ArrayList<State> states = new ArrayList();
         states = gen.getAll((byte) -1);
 

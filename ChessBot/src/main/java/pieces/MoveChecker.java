@@ -82,12 +82,6 @@ public class MoveChecker {
             } else if (target * side < 0) {
                 return MoveType.CAPTURE;
             }
-//        } else if (dRank == 0 && dFile == 2) {
-//            if (!check.isChallenged(fromRank, fromFile, side)
-//                    && !check.isChallenged(fromRank, fromFile + dir, side)
-//                    && !check.isChallenged(dRank, toFile, side)) {
-//                return MoveType.CASTLE;
-//            }
         }
         return MoveType.ILLEGAL;
     }

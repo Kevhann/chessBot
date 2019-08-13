@@ -31,7 +31,19 @@ public class Check {
         return isChallenged(state.board, king.getRank(), king.getFile(), side);
     }
     
+    public boolean isChallenged(byte[] board, Position pos, byte side) {
+        return isChallenged(board, pos.getRank(), pos.getFile(), side);
+    }
+    
 
+    /**
+     * 
+     * @param board The board that is tested for
+     * @param rank the rank of the square 0-7
+     * @param file the file of the square 0-7
+     * @param side the side tested for, -1 for black, 1 for white
+     * @return true if the square is challenged by the opposite side
+     */
     public boolean isChallenged(byte[] board, int rank, int file, byte side) {
         /**
          * Test for pawn and king captures
@@ -101,7 +113,7 @@ public class Check {
             }
         }
 
-        for (int i = rank - 1; i > 0; i--) {
+        for (int i = rank - 1; i >= 0; i--) {
             temp = func.pieceOnBoard(board, i, file);
             type = temp * side;
             if (type != 0) {
@@ -123,7 +135,7 @@ public class Check {
             }
         }
 
-        for (int i = file - 1; i > 0; i--) {
+        for (int i = file - 1; i >= 0; i--) {
             temp = func.pieceOnBoard(board, rank, i);
             type = temp * side;
             if (type != 0) {
@@ -148,7 +160,7 @@ public class Check {
             }
         }
 
-        for (int i = rank - 1, j = file + 1; i > 0 || j < 8; i--, j++) {
+        for (int i = rank - 1, j = file + 1; i >= 0 || j < 8; i--, j++) {
             temp = func.pieceOnBoard(board, i, j);
             type = temp * side;
             if (type != 0) {
@@ -159,7 +171,7 @@ public class Check {
             }
         }
 
-        for (int i = rank + 1, j = file - 1; i < 8 || j > 0; i++, j--) {
+        for (int i = rank + 1, j = file - 1; i < 8 || j >= 0; i++, j--) {
             temp = func.pieceOnBoard(board, i, j);
             type = temp * side;
             if (type != 0) {
@@ -170,7 +182,7 @@ public class Check {
             }
         }
 
-        for (int i = rank - 1, j = file - 1; i > 0 || j > 0; i--, j--) {
+        for (int i = rank - 1, j = file - 1; i >= 0 || j >= 0; i--, j--) {
             temp = func.pieceOnBoard(board, i, j);
             type = temp * side;
             if (type != 0) {

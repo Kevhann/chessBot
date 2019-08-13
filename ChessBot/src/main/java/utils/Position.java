@@ -53,6 +53,10 @@ public class Position {
     public void setRank(byte rank) {
         this.rank = rank;
     }
+    public void setPos(Position pos) {
+        this.file = pos.file;
+        this.rank = pos.rank;
+    }
 
     @Override
     public String toString() {

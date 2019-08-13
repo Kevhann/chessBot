@@ -34,9 +34,6 @@ public class GameIO {
 
         String input = scanner.nextLine();
 
-        System.out.println("Black king pos: " + board.getBlackKing());
-        System.out.println("White king pos: " + board.getWhiteKing());
-
         switch (input) {
             case "1":
                 gameMode1();
@@ -54,15 +51,13 @@ public class GameIO {
 
     public void gameMode1() {
         while (true) {
-            board.printBoard();
-            if (turn == 1) {
-                if (humanTurn(turn)) {
-                    break;
-                }
-            } else if (turn == -1) {
-                if (cpuTurn(turn)) {
-                    break;
-                }
+            System.out.println("---- Player Turn ----");
+            if (humanTurn(turn)) {
+                break;
+            }
+            System.out.println("---- Computer Turn ----");
+            if (cpuTurn(turn)) {
+                break;
             }
 
         }
@@ -71,20 +66,11 @@ public class GameIO {
     public void gameMode2() {
         while (true) {
             System.out.println("-------------");
-            board.printBoard();
-            System.out.println("Black king pos: " + board.getBlackKing());
-            System.out.println("White king pos: " + board.getWhiteKing());
-            System.out.println("-------------");
 
-            if (turn == 1) {
-                if (cpuTurn(turn)) {
-                    break;
-                }
-            } else if (turn == -1) {
-                if (cpuTurn(turn)) {
-                    break;
-                }
+            if (cpuTurn(turn)) {
+                break;
             }
+            System.out.println("-------------");
 
         }
     }
@@ -106,17 +92,17 @@ public class GameIO {
     }
 
     public boolean cpuTurn(Byte side) {
+
         if (side == -1) {
-            System.out.println("Black to move");
+            System.out.println("  -- Black to move --");
         } else {
-            System.out.println("White to move");
+            System.out.println("  -- White to move --");
         }
+        board.printBoard();
 
         if (check.isChallenged(board.getBoardState(), side)) {
             System.out.println("Check!");
-            System.out.println("Black king pos: " + board.getBlackKing());
-            System.out.println("White king pos: " + board.getWhiteKing());
-            System.out.println("kingpos: " + board.kingPos(side));
+            System.out.println("kingpos: " + board.getKingPos(side));
         }
 
         ArrayList<State> states = gen.getAll(side);
@@ -143,18 +129,17 @@ public class GameIO {
     }
 
     public boolean humanTurn(Byte side) {
-        board.printBoard();
         if (turn == 1) {
-            System.out.println("White to move, format b1,c3");
+            System.out.println("-- White to move, format b1,c3 --");
         } else {
-            System.out.println("Black to move, format b1,c3");
+            System.out.println("-- Black to move, format b1,c3 --");
         }
+
+        board.printBoard();
 
         if (check.isChallenged(board.getBoardState(), side)) {
             System.out.println("Check!");
-            System.out.println("Black king pos: " + board.getBlackKing());
-            System.out.println("White king pos: " + board.getWhiteKing());
-            System.out.println("kingpos: " + board.kingPos(side));
+            System.out.println("kingpos: " + board.getKingPos(side));
             if (gen.getAll((byte) side).isEmpty()) {
                 System.out.println("Checkmate!!");
                 System.out.println("Black Won");

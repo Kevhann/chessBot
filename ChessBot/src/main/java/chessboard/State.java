@@ -35,7 +35,6 @@ public class State implements Comparable<State> {
     }
     
     public void setState(byte fromRank, byte fromFile, byte toRank, byte toFile, byte value) {
-        System.out.println("torank: " + toRank + ", toFile: " + toFile + ", value: " + value);
         this.move = new Move(fromRank, fromFile, toRank, toFile);
         board[(fromRank * 8) + fromFile] = 0;
         board[(toRank * 8) + toFile] = value;

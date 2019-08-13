@@ -21,12 +21,12 @@ public class Chessboard {
     private final String[] symbols = {" ♟ ", " ♜ ", " ♞ ", " ♝ ", " ♛ ", " ♚ ", "   ", " ♔ ", " ♕ ", " ♗ ", " ♘ ", " ♖ ", " ♙ "};
     private Check check = new Check();
     private byte[] board;
-    private State current;
-    private byte[] castle;
+//    private State current;
+//    private byte[] castle;
     private Position blackKing;
     private Position whiteKing;
-    public boolean whiteCheck;
-    public boolean blackCheck;
+//    public boolean whiteCheck;
+//    public boolean blackCheck;
 
     /**
      * <pre>
@@ -42,8 +42,8 @@ public class Chessboard {
      * </pre>
      */
     public Chessboard() {
-        this.current = new State(new byte[64]);
-        this.board = current.getBoard();
+//        this.current = new State(new byte[64]);
+        this.board = new byte[64];
         this.whiteKing = new Position("e1");
         this.blackKing = new Position("e8");
     }
@@ -140,21 +140,17 @@ public class Chessboard {
             case ILLEGAL:
                 throw new IllegalMoveException("Unvalid Move");
             default:
+
                 if (piecetype == 1) {
-                    if (check.isChallenged(board, toRank, toFile, turn)) {
-                        throw new IllegalMoveException("King cannot move");
-                    } else {
-                        if (turn == 1) {
-                            whiteKing.setPos(toRank, toFile);
-                        } else {
-                            blackKing.setPos(toRank, toFile);
-                        }
-                    }
-
+                    setKingPos(new Position(toRank, toFile), turn);
                 }
-                board[(fromRank * 8) + fromFile] = 0;
-                board[(toRank * 8) + toFile] = currentPiece;
 
+                if (check.isChallenged(board, getKingPos(turn), turn)) {
+                    throw new IllegalMoveException("King cannot move");
+                } else {
+                    board[(fromRank * 8) + fromFile] = 0;
+                    board[(toRank * 8) + toFile] = currentPiece;
+                }
         }
     }
 
@@ -210,10 +206,6 @@ public class Chessboard {
     }
 
     public void cpMove(Move move, byte turn) {
-        byte fromRank = move.fromRank;
-        byte fromFile = move.fromFile;
-        byte toRank = move.toRank;
-        byte toFile = move.toFile;
         byte to = move.getTo64();
         byte from = move.getFrom64();
         byte piece = board[from];
@@ -227,17 +219,33 @@ public class Chessboard {
 
     }
 
+    public void cpMove(State state) {
+
+        whiteKing.setPos(state.getWhiteKing());
+        blackKing.setPos(state.getBlackKing());
+        board = state.board;
+
+    }
+
     public void addPiece(byte piece, String place) {
         int rank = Character.getNumericValue(place.charAt(1)) - 1;
         int file = place.charAt(0) - 97;
         board[(rank * 8) + file] = piece;
     }
 
-    public Position kingPos(byte side) {
+    public Position getKingPos(byte side) {
         if (side == 1) {
             return whiteKing;
         } else {
             return blackKing;
+        }
+    }
+
+    public void setKingPos(Position pos, byte side) {
+        if (side == 1) {
+            whiteKing = pos;
+        } else {
+            blackKing = pos;
         }
     }
 
@@ -256,5 +264,5 @@ public class Chessboard {
     public void setWhiteKing(Position whiteKing) {
         this.whiteKing = whiteKing;
     }
-    
+
 }
