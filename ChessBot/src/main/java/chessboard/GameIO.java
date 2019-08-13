@@ -5,12 +5,13 @@
  */
 package chessboard;
 
+import engine.Minimax;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import utils.IllegalMoveException;
 import java.util.Scanner;
-import pieces.MoveGenerator;
+import engine.MoveGenerator;
 
 /**
  *
@@ -24,6 +25,7 @@ public class GameIO {
     byte turn = 1;
     MoveGenerator gen = new MoveGenerator(board);
     Check check = new Check();
+    Minimax minimax = new Minimax(gen, 2);
 
     public void runGame() {
         board.addPieces();
@@ -104,7 +106,22 @@ public class GameIO {
             System.out.println("Check!");
             System.out.println("kingpos: " + board.getKingPos(side));
         }
+        if (board.piecesOnBoard() < 3) {
+            return true;
+        }
 
+        State move = generateTurn(side);
+
+        if (move == null) {
+            return true;
+        }
+
+        board.cpMove(move);
+        turn *= -1;
+        return false;
+    }
+
+    public State generateTurn(byte side) {
         ArrayList<State> states = gen.getAll(side);
         Collections.shuffle(states);
 
@@ -115,18 +132,21 @@ public class GameIO {
             } else {
                 System.out.println("White won!");
             }
-            return true;
+            return null;
         }
 
         Collections.sort(states);
-        if (turn == 1) {
-            board.cpMove(states.get(0).move, (byte) -1);
+        if (side == 1) {
+            return states.get(0);
         } else {
-            board.cpMove(states.get(states.size() - 1).move, (byte) -1);
+            return states.get(states.size() - 1);
         }
-        turn *= -1;
-        return false;
+
     }
+    
+//    public State minimaxTurn(byte turn, int depth) {
+//        minimax.minimax(state, true, depth)
+//    }
 
     public boolean humanTurn(Byte side) {
         if (turn == 1) {
@@ -164,4 +184,5 @@ public class GameIO {
         }
         return false;
     }
+
 }

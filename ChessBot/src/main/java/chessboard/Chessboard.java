@@ -5,9 +5,9 @@
  */
 package chessboard;
 
+import engine.MoveChecker;
 import utils.IllegalMoveException;
 import utils.MoveType;
-import pieces.*;
 import utils.Position;
 
 /**
@@ -21,12 +21,8 @@ public class Chessboard {
     private final String[] symbols = {" ♟ ", " ♜ ", " ♞ ", " ♝ ", " ♛ ", " ♚ ", "   ", " ♔ ", " ♕ ", " ♗ ", " ♘ ", " ♖ ", " ♙ "};
     private Check check = new Check();
     private byte[] board;
-//    private State current;
-//    private byte[] castle;
     private Position blackKing;
     private Position whiteKing;
-//    public boolean whiteCheck;
-//    public boolean blackCheck;
 
     /**
      * <pre>
@@ -48,6 +44,9 @@ public class Chessboard {
         this.blackKing = new Position("e8");
     }
 
+    /**
+     * Adds the starting pieces to their initial places
+     */
     public void addPieces() {
         board[0] = 5;
         board[7] = 5;
@@ -72,6 +71,9 @@ public class Chessboard {
 
     }
 
+    /**
+     * Print the current state of the board before each turn
+     */
     public void printBoard() {
         System.out.println("");
         for (int i = 7; i >= 0; i--) {
@@ -87,6 +89,13 @@ public class Chessboard {
         System.out.println("");
     }
 
+    /**
+     * Method for moving the human players moves.
+     * Checks the validity of the attempted move
+     * @param move the move to attempt
+     * @param turn the turn of the player, 1 for white, -1 for black
+     * @throws IllegalMoveException if the move is invalid
+     */
     public void move(Move move, byte turn) throws IllegalMoveException {
         byte fromRank = move.getFromRank();
         byte fromFile = move.getFromFile();
@@ -154,6 +163,12 @@ public class Chessboard {
         }
     }
 
+    /**
+     * 
+     * @param rank
+     * @param file
+     * @return (+/-)1-6 for pieces, 0 for empty and out of bounds
+     */
     public byte pieceOnBoard(int rank, int file) {
         if (rank < 0 || rank > 7 || file < 0 || file > 7) {
             return 0;
@@ -161,6 +176,7 @@ public class Chessboard {
         return board[(rank * 8) + file];
     }
 
+    
     public byte pieceOnBoard(String place) {
         int rank = Character.getNumericValue(place.charAt(1)) - 1;
         int file = place.charAt(0) - 97;
@@ -180,6 +196,11 @@ public class Chessboard {
         return new State(state, whiteKing, blackKing);
     }
 
+    /**
+     * Used to print the visual representation of the board
+     * Used for testing purposes
+     * @param state the state to print out
+     */
     public void printState(byte[] state) {
         System.out.println("");
         for (int i = 7; i >= 0; i--) {
@@ -205,6 +226,11 @@ public class Chessboard {
         this.board = state;
     }
 
+    /**
+     * The method for the computer to move a piece on the board
+     * @param move The move to be made
+     * @param turn the turn to make the move, 1 for white -1 for black
+     */
     public void cpMove(Move move, byte turn) {
         byte to = move.getTo64();
         byte from = move.getFrom64();
@@ -219,20 +245,33 @@ public class Chessboard {
 
     }
 
+    /**
+     * The method for the computer to move a piece on the board
+     * @param state the state to use, copies the values to the current state of the board
+     */
     public void cpMove(State state) {
-
         whiteKing.setPos(state.getWhiteKing());
         blackKing.setPos(state.getBlackKing());
         board = state.board;
-
     }
 
+    /**
+     * Add a single piece on the board.
+     * Used for testing purposes
+     * @param piece The piece to add, 1-6, positive for white, negative for black
+     * @param place The place to add the piece in format "d4"
+     */
     public void addPiece(byte piece, String place) {
         int rank = Character.getNumericValue(place.charAt(1)) - 1;
         int file = place.charAt(0) - 97;
         board[(rank * 8) + file] = piece;
     }
 
+    /**
+     * 
+     * @param side The desired side
+     * @return the position of the desired king
+     */
     public Position getKingPos(byte side) {
         if (side == 1) {
             return whiteKing;
@@ -247,6 +286,19 @@ public class Chessboard {
         } else {
             blackKing = pos;
         }
+    }
+    /**
+     * 
+     * @return the total number of pieces on the board
+     */
+    public int piecesOnBoard() {
+        int amount = 0;
+        for (int i = 0; i < 64; i++) {
+            if (board[i] != 0) {
+                amount++;
+            }
+        }
+        return amount;
     }
 
     public Position getBlackKing() {

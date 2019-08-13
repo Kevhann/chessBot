@@ -11,8 +11,8 @@ import chessboard.GameIO;
 import chessboard.Move;
 import chessboard.State;
 import java.util.ArrayList;
-import pieces.MoveChecker;
-import pieces.MoveGenerator;
+import engine.MoveChecker;
+import engine.MoveGenerator;
 import utils.IllegalMoveException;
 import utils.Position;
 
@@ -58,7 +58,7 @@ public class Main {
         System.out.println("moves: " + states.size());
 
         for (int i = 0; i < states.size(); i++) {
-            System.out.println("Score: " + states.get(i).getScore((byte) 1));
+            System.out.println("Score: " + states.get(i).getScore());
             board.printState(states.get(i).board);
             System.out.println("---");
             System.out.println(states.get(i).move);

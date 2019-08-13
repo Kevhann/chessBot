@@ -5,6 +5,8 @@
  */
 package pieces;
 
+import engine.MoveChecker;
+import engine.MoveGenerator;
 import chessboard.*;
 import org.junit.After;
 import org.junit.AfterClass;

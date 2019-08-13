@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pieces;
+package engine;
 
 import chessboard.*;
 import java.util.ArrayList;
@@ -529,12 +529,13 @@ public class MoveGenerator {
         piece = board.pieceOnBoard(rank + side, file);
         if (piece == 0) {
             state = new State(board.getBoardState());
-            if (rank == 7 || rank == 0) {
-//                state.setState((byte) rank, (byte) file, (byte) (rank + side), (byte) file, (byte) (side * 6));
+            if (rank + side == 7 || rank + side == 0) {
+                state.setState((byte) rank, (byte) file, (byte) (rank + side), (byte) file, (byte) (side * 2));
+                states.add(state);
             } else {
                 state.setState((byte) rank, (byte) file, (byte) (rank + side), (byte) file, (byte) (side * 6));
+                states.add(state);
             }
-            states.add(state);
         }
 
         piece = board.pieceOnBoard(rank + side, file + 1);

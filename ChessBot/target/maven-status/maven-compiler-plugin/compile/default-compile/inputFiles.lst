@@ -1,12 +1,13 @@
 /home/kevin/tkt/chessBot/ChessBot/src/main/java/com/mycompany/chessbot/Main.java
-/home/kevin/tkt/chessBot/ChessBot/src/main/java/utils/Func.java
 /home/kevin/tkt/chessBot/ChessBot/src/main/java/utils/IllegalMoveException.java
-/home/kevin/tkt/chessBot/ChessBot/src/main/java/utils/Position.java
+/home/kevin/tkt/chessBot/ChessBot/src/main/java/engine/MoveChecker.java
 /home/kevin/tkt/chessBot/ChessBot/src/main/java/chessboard/Check.java
-/home/kevin/tkt/chessBot/ChessBot/src/main/java/pieces/MoveGenerator.java
+/home/kevin/tkt/chessBot/ChessBot/src/main/java/engine/Minimax.java
+/home/kevin/tkt/chessBot/ChessBot/src/main/java/utils/Func.java
+/home/kevin/tkt/chessBot/ChessBot/src/main/java/utils/Position.java
 /home/kevin/tkt/chessBot/ChessBot/src/main/java/chessboard/Chessboard.java
 /home/kevin/tkt/chessBot/ChessBot/src/main/java/utils/MoveType.java
 /home/kevin/tkt/chessBot/ChessBot/src/main/java/chessboard/GameIO.java
 /home/kevin/tkt/chessBot/ChessBot/src/main/java/chessboard/Move.java
 /home/kevin/tkt/chessBot/ChessBot/src/main/java/chessboard/State.java
-/home/kevin/tkt/chessBot/ChessBot/src/main/java/pieces/MoveChecker.java
+/home/kevin/tkt/chessBot/ChessBot/src/main/java/engine/MoveGenerator.java

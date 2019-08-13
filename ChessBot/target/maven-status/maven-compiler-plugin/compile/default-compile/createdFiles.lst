@@ -2,12 +2,13 @@ com/mycompany/chessbot/Main.class
 utils/Func.class
 chessboard/Check.class
 chessboard/Chessboard.class
-pieces/MoveChecker.class
 chessboard/State.class
+engine/MoveGenerator.class
 chessboard/GameIO.class
 utils/Position.class
+engine/MoveChecker.class
 chessboard/Chessboard$1.class
-pieces/MoveGenerator.class
 utils/IllegalMoveException.class
 utils/MoveType.class
+engine/Minimax.class
 chessboard/Move.class

@@ -23,11 +23,13 @@ public class State implements Comparable<State> {
     public State(byte[] state) {
         this.board = state;
     }
+    
     public State(State state) {
         this.board = state.board;
         this.whiteKing = state.getWhiteKing();
         this.blackKing = state.getBlackKing();
     }
+    
     public State(byte[] state, Position whiteKing, Position blackKing) {
         this.board = state;
         this.whiteKing = whiteKing;
@@ -156,8 +158,9 @@ public class State implements Comparable<State> {
             this.blackKing = pos;
         }
     }
-    public int getScore(byte side) {
-        return score * side;
+    public int getScore() {
+        return score;
     }
+    
 
 }
