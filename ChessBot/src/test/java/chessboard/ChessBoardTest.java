@@ -60,7 +60,8 @@ public class ChessBoardTest {
 
     @Test
     public void chessBoardIsInitializedCorrectly() {
-        String expected = "\n8   ♜  ♞  ♝  ♛  ♚  ♝  ♞  ♜ \n"
+        String expected = "Score: 0\n"
+                + "8   ♜  ♞  ♝  ♛  ♚  ♝  ♞  ♜ \n"
                 + "7   ♟  ♟  ♟  ♟  ♟  ♟  ♟  ♟ \n"
                 + "6                          \n"
                 + "5                          \n"

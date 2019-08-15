@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="16" failures="0" name="chessboard.CheckTest" time="0" errors="0" skipped="0">
+<testsuite tests="16" failures="0" name="chessboard.CheckTest" time="0.015" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="11.0.2+9-LTS"/>
@@ -42,7 +42,7 @@
     <property name="java.class.path" value="/snap/netbeans/10/netbeans/java/maven/boot/plexus-classworlds-2.5.2.jar"/>
     <property name="java.vm.specification.version" value="11"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=/snap/netbeans/10/netbeans/java/maven-nblib/netbeans-eventspy.jar test"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=/snap/netbeans/10/netbeans/java/maven-nblib/netbeans-eventspy.jar clean install"/>
     <property name="java.home" value="/usr/lib/jvm/java-11-oracle"/>
     <property name="user.language" value="en"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
@@ -65,7 +65,7 @@
   <testcase classname="chessboard.CheckTest" name="rooksChallengeCorrectly2" time="0"/>
   <testcase classname="chessboard.CheckTest" name="bishopsChallengeCorrectly1" time="0"/>
   <testcase classname="chessboard.CheckTest" name="bishopsChallengeCorrectly2" time="0"/>
-  <testcase classname="chessboard.CheckTest" name="returnsFalseWithEmptyBoard" time="0"/>
+  <testcase classname="chessboard.CheckTest" name="returnsFalseWithEmptyBoard" time="0.01"/>
   <testcase classname="chessboard.CheckTest" name="queensChallengeCorrectly1" time="0"/>
   <testcase classname="chessboard.CheckTest" name="queensChallengeCorrectly2" time="0"/>
   <testcase classname="chessboard.CheckTest" name="whitePawnsChallengeCorrectly" time="0"/>
@@ -76,5 +76,5 @@
   <testcase classname="chessboard.CheckTest" name="bishopsCannotChallengeThroughPieces" time="0"/>
   <testcase classname="chessboard.CheckTest" name="kingChallengesCorrectly" time="0"/>
   <testcase classname="chessboard.CheckTest" name="queensCannotChallengeThroughPieces1" time="0"/>
-  <testcase classname="chessboard.CheckTest" name="queensCannotChallengeThroughPieces2" time="0"/>
+  <testcase classname="chessboard.CheckTest" name="queensCannotChallengeThroughPieces2" time="0.005"/>
 </testsuite>

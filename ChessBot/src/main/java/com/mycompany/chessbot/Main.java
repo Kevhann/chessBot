@@ -61,7 +61,7 @@ public class Main {
             System.out.println("Score: " + states.get(i).getScore());
             board.printState(states.get(i).board);
             System.out.println("---");
-            System.out.println(states.get(i).move);
+//            System.out.println(states.get(i).move);
             System.out.println("----");
         }
         System.out.println("-------------");

@@ -532,7 +532,7 @@ public class MoveGenerator {
             if (rank + side == 7 || rank + side == 0) {
                 state.setState((byte) rank, (byte) file, (byte) (rank + side), (byte) file, (byte) (side * 2));
                 states.add(state);
-            } else {
+            } else  if (!(rank == 7 || rank == 0)){
                 state.setState((byte) rank, (byte) file, (byte) (rank + side), (byte) file, (byte) (side * 6));
                 states.add(state);
             }
@@ -541,14 +541,14 @@ public class MoveGenerator {
         piece = board.pieceOnBoard(rank + side, file + 1);
         if (piece * side < 0) {
             state = new State(board.getBoardState());
-            state.setState((byte) rank, (byte) file, (byte) (rank + 1), (byte) (file + 1), (byte) (side * 6));
+            state.setState((byte) rank, (byte) file, (byte) (rank + side), (byte) (file + 1), (byte) (side * 6));
             states.add(state);
         }
 
         piece = board.pieceOnBoard(rank + side, file - 1);
         if (piece * side < 0) {
             state = new State(board.getBoardState());
-            state.setState((byte) rank, (byte) file, (byte) (rank + 1), (byte) (file - 1), (byte) (side * 6));
+            state.setState((byte) rank, (byte) file, (byte) (rank + side), (byte) (file - 1), (byte) (side * 6));
             states.add(state);
 
         }

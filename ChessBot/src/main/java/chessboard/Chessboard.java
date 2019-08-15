@@ -20,6 +20,7 @@ public class Chessboard {
     private final String[] files = {"   ", " a ", " b ", " c ", " d ", " e ", " f ", " g ", " h "};
     private final String[] symbols = {" ♟ ", " ♜ ", " ♞ ", " ♝ ", " ♛ ", " ♚ ", "   ", " ♔ ", " ♕ ", " ♗ ", " ♘ ", " ♖ ", " ♙ "};
     private Check check = new Check();
+    private int score = 0;
     private byte[] board;
     private Position blackKing;
     private Position whiteKing;
@@ -75,7 +76,7 @@ public class Chessboard {
      * Print the current state of the board before each turn
      */
     public void printBoard() {
-        System.out.println("");
+        System.out.println("Score: " + score);
         for (int i = 7; i >= 0; i--) {
             System.out.print(i + 1 + "  ");
             for (int j = 0; j < 8; j++) {
@@ -90,8 +91,30 @@ public class Chessboard {
     }
 
     /**
-     * Method for moving the human players moves.
-     * Checks the validity of the attempted move
+     * Used to print the visual representation of the board Used for testing
+     * purposes
+     *
+     * @param state the state to print out
+     */
+    public void printState(byte[] state) {
+        System.out.println("");
+        for (int i = 7; i >= 0; i--) {
+            System.out.print(i + 1 + "  ");
+            for (int j = 0; j < 8; j++) {
+                System.out.print(symbols[state[(8 * i) + j] + 6]);
+            }
+            System.out.println("");
+        }
+        for (int i = 0; i < 9; i++) {
+            System.out.print(files[i]);
+        }
+        System.out.println("");
+    }
+
+    /**
+     * Method for moving the human players moves. Checks the validity of the
+     * attempted move
+     *
      * @param move the move to attempt
      * @param turn the turn of the player, 1 for white, -1 for black
      * @throws IllegalMoveException if the move is invalid
@@ -157,6 +180,12 @@ public class Chessboard {
                 if (check.isChallenged(board, getKingPos(turn), turn)) {
                     throw new IllegalMoveException("King cannot move");
                 } else {
+                    if (piecetype == 6) {
+                        if (toRank == 0 || toRank == 7) {
+                            board[(fromRank * 8) + fromFile] = 0;
+                            board[(toRank * 8) + toFile] = (byte) (2 * turn);
+                        }
+                    }
                     board[(fromRank * 8) + fromFile] = 0;
                     board[(toRank * 8) + toFile] = currentPiece;
                 }
@@ -164,7 +193,20 @@ public class Chessboard {
     }
 
     /**
-     * 
+     * The method for the computer to move a piece on the board
+     *
+     * @param state the state to use, copies the values to the current state of
+     * the board
+     */
+    public void cpMove(State state) {
+        whiteKing.setPos(state.getWhiteKing());
+        blackKing.setPos(state.getBlackKing());
+        board = state.board;
+        score = state.getScore();
+    }
+
+    /**
+     *
      * @param rank
      * @param file
      * @return (+/-)1-6 for pieces, 0 for empty and out of bounds
@@ -176,7 +218,6 @@ public class Chessboard {
         return board[(rank * 8) + file];
     }
 
-    
     public byte pieceOnBoard(String place) {
         int rank = Character.getNumericValue(place.charAt(1)) - 1;
         int file = place.charAt(0) - 97;
@@ -196,26 +237,6 @@ public class Chessboard {
         return new State(state, whiteKing, blackKing);
     }
 
-    /**
-     * Used to print the visual representation of the board
-     * Used for testing purposes
-     * @param state the state to print out
-     */
-    public void printState(byte[] state) {
-        System.out.println("");
-        for (int i = 7; i >= 0; i--) {
-            System.out.print(i + 1 + "  ");
-            for (int j = 0; j < 8; j++) {
-                System.out.print(symbols[state[(8 * i) + j] + 6]);
-            }
-            System.out.println("");
-        }
-        for (int i = 0; i < 9; i++) {
-            System.out.print(files[i]);
-        }
-        System.out.println("");
-    }
-
     public void clearBoard() {
         board = new byte[64];
         this.whiteKing = new Position("e1");
@@ -227,38 +248,10 @@ public class Chessboard {
     }
 
     /**
-     * The method for the computer to move a piece on the board
-     * @param move The move to be made
-     * @param turn the turn to make the move, 1 for white -1 for black
-     */
-    public void cpMove(Move move, byte turn) {
-        byte to = move.getTo64();
-        byte from = move.getFrom64();
-        byte piece = board[from];
-        if (piece == 1) {
-            whiteKing.setPos(to);
-        } else if (piece == -1) {
-            blackKing.setPos(to);
-        }
-        board[from] = 0;
-        board[to] = piece;
-
-    }
-
-    /**
-     * The method for the computer to move a piece on the board
-     * @param state the state to use, copies the values to the current state of the board
-     */
-    public void cpMove(State state) {
-        whiteKing.setPos(state.getWhiteKing());
-        blackKing.setPos(state.getBlackKing());
-        board = state.board;
-    }
-
-    /**
-     * Add a single piece on the board.
-     * Used for testing purposes
-     * @param piece The piece to add, 1-6, positive for white, negative for black
+     * Add a single piece on the board. Used for testing purposes
+     *
+     * @param piece The piece to add, 1-6, positive for white, negative for
+     * black
      * @param place The place to add the piece in format "d4"
      */
     public void addPiece(byte piece, String place) {
@@ -268,7 +261,7 @@ public class Chessboard {
     }
 
     /**
-     * 
+     *
      * @param side The desired side
      * @return the position of the desired king
      */
@@ -287,8 +280,9 @@ public class Chessboard {
             blackKing = pos;
         }
     }
+
     /**
-     * 
+     *
      * @return the total number of pieces on the board
      */
     public int piecesOnBoard() {

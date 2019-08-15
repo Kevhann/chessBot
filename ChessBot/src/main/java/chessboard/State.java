@@ -16,7 +16,7 @@ public class State implements Comparable<State> {
 
     public byte[] board;
     private int score;
-    public Move move;
+//    public Move move;
     private Position whiteKing;
     private Position blackKing;
 
@@ -37,10 +37,8 @@ public class State implements Comparable<State> {
     }
     
     public void setState(byte fromRank, byte fromFile, byte toRank, byte toFile, byte value) {
-        this.move = new Move(fromRank, fromFile, toRank, toFile);
         board[(fromRank * 8) + fromFile] = 0;
         board[(toRank * 8) + toFile] = value;
-        evaluate();
     }
     
     public byte getPiece(int index) {
@@ -89,53 +87,58 @@ public class State implements Comparable<State> {
     
     
     
-   
-    public void evaluate() {
+   /**
+    * The function for evaluating the state of the board.
+    * Negative values favor black, Positive value favor white
+    * @return the value of the board
+    */
+    public int evaluate() {
         int score = 0;
         for (int i = 0; i < 64; i++) {
             byte piece = board[i];
             int rank = i / 8;
             int file = i - (rank * 8);
             switch (piece) {
-                case -1:
+                case 1:
                     score += 900;
                     break;
-                case -2:
+                case 2:
                     score += 90;
                     break;
-                case -3:
-                    score += 30;
-                    break;
-                case -4:
-                    score += 30;
-                    break;
-                case -5:
-                    score += 50;
-                    break;
-                case -6:
-                    score += 10;
-                    break;
-                case 1:
-                    score -= 900;
-                    break;
-                case 2:
-                    score -= 90;
-                    break;
                 case 3:
-                    score -= 30;
+                    score += 30;
                     break;
                 case 4:
-                    score -= 30;
+                    score += 30;
                     break;
                 case 5:
-                    score -= 50;
+                    score += 50;
                     break;
                 case 6:
+                    score += 10;
+                    break;
+                case -1:
+                    score -= 900;
+                    break;
+                case -2:
+                    score -= 90;
+                    break;
+                case -3:
+                    score -= 30;
+                    break;
+                case -4:
+                    score -= 30;
+                    break;
+                case -5:
+                    score -= 50;
+                    break;
+                case -6:
                     score -= 10;
                     break;
             }
         }
         this.score = score;
+        return score;
     }
     
     public Position kingPos(byte side) {
@@ -148,7 +151,7 @@ public class State implements Comparable<State> {
 
     @Override
     public int compareTo(State s) {
-        return this.score - s.score;
+        return evaluate() - s.evaluate();
     }
     
     public void setKingPos(byte side, Position pos) {
@@ -158,9 +161,29 @@ public class State implements Comparable<State> {
             this.blackKing = pos;
         }
     }
+    
+    public void printState() {
+        System.out.println("");
+        for (int i = 7; i >= 0; i--) {
+            System.out.print(i + 1 + "  ");
+            for (int j = 0; j < 8; j++) {
+                System.out.print(board[(8 * i) + j]);
+            }
+            System.out.println("");
+        }
+        System.out.println("   ");
+        for (int i = 1; i < 9; i++) {
+            System.out.print(" " + i + " ");
+        }
+        System.out.println("");
+    }
+    
+    
     public int getScore() {
         return score;
     }
-    
 
+    public void setScore(int score) {
+        this.score = score;
+    }
 }
