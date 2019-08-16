@@ -6,11 +6,11 @@
 package engine;
 
 import chessboard.Chessboard;
-import chessboard.Move;
+import utils.Move;
 import utils.MoveType;
 
 /**
- *
+ * Checks the legality of player-inputted moves depending on the piece
  * @author kevin
  */
 public class MoveChecker {

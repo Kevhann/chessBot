@@ -5,6 +5,7 @@
  */
 package chessboard;
 
+import utils.Move;
 import engine.MoveChecker;
 import utils.IllegalMoveException;
 import utils.MoveType;
@@ -17,8 +18,7 @@ import utils.Position;
 public class Chessboard {
 
     private final MoveChecker checker = new MoveChecker(this);
-    private final String[] files = {"   ", " a ", " b ", " c ", " d ", " e ", " f ", " g ", " h "};
-    private final String[] symbols = {" ♟ ", " ♜ ", " ♞ ", " ♝ ", " ♛ ", " ♚ ", "   ", " ♔ ", " ♕ ", " ♗ ", " ♘ ", " ♖ ", " ♙ "};
+
     private Check check = new Check();
     private int score = 0;
     private byte[] board;
@@ -70,45 +70,6 @@ public class Chessboard {
             board[48 + i] = -6;
         }
 
-    }
-
-    /**
-     * Print the current state of the board before each turn
-     */
-    public void printBoard() {
-        System.out.println("Score: " + score);
-        for (int i = 7; i >= 0; i--) {
-            System.out.print(i + 1 + "  ");
-            for (int j = 0; j < 8; j++) {
-                System.out.print(symbols[board[(8 * i) + j] + 6]);
-            }
-            System.out.println("");
-        }
-        for (int i = 0; i < 9; i++) {
-            System.out.print(files[i]);
-        }
-        System.out.println("");
-    }
-
-    /**
-     * Used to print the visual representation of the board Used for testing
-     * purposes
-     *
-     * @param state the state to print out
-     */
-    public void printState(byte[] state) {
-        System.out.println("");
-        for (int i = 7; i >= 0; i--) {
-            System.out.print(i + 1 + "  ");
-            for (int j = 0; j < 8; j++) {
-                System.out.print(symbols[state[(8 * i) + j] + 6]);
-            }
-            System.out.println("");
-        }
-        for (int i = 0; i < 9; i++) {
-            System.out.print(files[i]);
-        }
-        System.out.println("");
     }
 
     /**
@@ -309,6 +270,10 @@ public class Chessboard {
 
     public void setWhiteKing(Position whiteKing) {
         this.whiteKing = whiteKing;
+    }
+
+    public int getScore() {
+        return score;
     }
 
 }

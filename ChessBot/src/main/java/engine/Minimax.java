@@ -15,13 +15,49 @@ import java.util.Collections;
  */
 public class Minimax {
 
-    private int depth;
     MoveGenerator gen;
 
-    public Minimax(MoveGenerator g, int d) {
-        this.depth = d;
+    public Minimax(MoveGenerator g) {
         this.gen = g;
     }
+    
+    /**
+     * Evaluates the best move using minimax to a given depth and returns it
+     * @param depth
+     * @return The best move evaluated with minimax
+     */
+     public State minimaxTurn(int depth, byte side) {
+        ArrayList<State> states = gen.getAll(side);
+        
+        Collections.shuffle(states);
+        int min = 99999;
+        int mini = 0;
+        int max = -99999;
+        int maxi = 0;
+
+        for (int i = 0; i < states.size(); i++) {
+            State temp = states.get(i);
+            int score = minimax(temp, side == -1, depth, -99999, 99999);
+            temp.setScore(score);
+
+            if (score < min) {
+                min = score;
+                mini = i;
+            }
+
+            if (score > max) {
+                max = score;
+                maxi = i;
+            }
+        }
+
+        if (side == 1) {
+            return states.get(maxi);
+        } else {
+            return states.get(mini);
+        }
+    }
+
 
     /**
      * Depth-limited search algorithm using alpha-beta pruning
@@ -34,41 +70,31 @@ public class Minimax {
      * @return the minimax value
      */
     public int minimax(State state, boolean white, int depth, int alpha, int beta) {
-        System.out.println("minimax depth: " + depth);
-        System.out.println("minimax state: ");
-        state.printState();
-        System.out.println(" - - -");
         
         if (depth == 0) {
             int value = state.evaluate();
-            System.out.println("minimax value: " + value);
             return value;
         } 
         
         ArrayList<State> states;
         
         if (white) {
-            states = gen.getAll((byte) 1);
+            states = gen.getAll(state, (byte) 1);
         } else {
-            states = gen.getAll((byte) -1);
+            states = gen.getAll(state, (byte) -1);
         }
         
-        for (int i = 0; i < states.size(); i++) {
-            System.out.println(" - - - ");
-            states.get(i).printState();
-            System.out.println(" - - - ");
-        }
         
         if (states.isEmpty()) {
             if (white) {
-                return 99999;
-            } else {
                 return -99999;
+            } else {
+                return 99999;
             }
         }
 
         if (white) {
-            int base = -9999;
+            int base = -99999;
 
             int size = states.size();
             for (int i = 0; i < size; i++) {
@@ -85,7 +111,7 @@ public class Minimax {
             }
             return base;
         } else {
-            int base = 9999;
+            int base = 99999;
             int size = states.size();
             for (int i = 0; i < size; i++) {
                 int value = minimax(states.get(i), true, depth - 1, alpha, beta);

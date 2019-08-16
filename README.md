@@ -2,6 +2,8 @@
 
 [Määrittelydokumentti](/dokumentaatio/maarittelydokumentti.md)
 
+[Viikkoraportti 4](/dokumentaatio/viikkoraportti_4.md)
+
 [Viikkoraportti 3](/dokumentaatio/viikkoraportti_3.md)
 
 [Viikkoraportti 2](/dokumentaatio/viikkoraportti_2.md)
@@ -15,3 +17,4 @@
 | 1      | 3       | aiheen päättäminen, määrittelydokumentti     |
 | 2      | 15      | Shakkipelin rakentaminen                     |
 | 3      | 16      | Laillisten siirtojen listaus, refaktorointia |
+| 4      | 12      | Minimax toteutus, refaktorointia, korjauksia |

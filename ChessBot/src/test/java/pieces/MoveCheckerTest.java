@@ -5,6 +5,7 @@
  */
 package pieces;
 
+import utils.Move;
 import engine.MoveChecker;
 import utils.*;
 import chessboard.*;

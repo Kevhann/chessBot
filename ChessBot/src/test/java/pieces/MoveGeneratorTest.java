@@ -159,5 +159,7 @@ public class MoveGeneratorTest {
         board.addPiece((byte) -2, "d5");
         assertEquals(27, gen.getAll((byte) -1).size());
     }
+    
+    
 
 }

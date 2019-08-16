@@ -5,6 +5,7 @@
  */
 package chessboard;
 
+import utils.Move;
 import utils.IllegalMoveException;
 import chessboard.*;
 import org.junit.After;

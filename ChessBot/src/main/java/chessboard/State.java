@@ -25,7 +25,7 @@ public class State implements Comparable<State> {
     }
     
     public State(State state) {
-        this.board = state.board;
+        this.board = state.getBoard();
         this.whiteKing = state.getWhiteKing();
         this.blackKing = state.getBlackKing();
     }
@@ -58,7 +58,7 @@ public class State implements Comparable<State> {
     }
 
     public byte[] getBoard() {
-        return board;
+        return board.clone();
     }
 
     public void setWhiteKing(Position whiteKing) {
