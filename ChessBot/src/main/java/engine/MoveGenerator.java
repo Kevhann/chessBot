@@ -43,6 +43,7 @@ public class MoveGenerator {
 
     /**
      * Generates all legal moves for the current state of the game
+     *
      * @param side side of player
      * @return list of all legal moves
      */
@@ -60,11 +61,13 @@ public class MoveGenerator {
                 allStates.addAll(states);
             }
         }
-        return removeStatesInCheck(allStates, side);
+        return allStates;
+//        return removeStatesInCheck(allStates, side);
     }
 
     /**
      * Generates all legal moves for a given state of the game
+     *
      * @param side side of player
      * @return list of all legal moves
      */
@@ -83,21 +86,22 @@ public class MoveGenerator {
                 allStates.addAll(states);
             }
         }
-        return removeStatesInCheck(allStates, side);
-
-    }
-
-    public ArrayList<State> removeStatesInCheck(ArrayList<State> allStates, byte side) {
-        int size = allStates.size();
-        for (int i = size - 1; i >= 0; i--) {
-            State s = allStates.get(i);
-
-            if (check.isChallenged(s, side)) {
-                allStates.remove(i);
-            }
-        }
         return allStates;
+//        return removeStatesInCheck(allStates, side);
+
     }
+
+//    public ArrayList<State> removeStatesInCheck(ArrayList<State> allStates, byte side) {
+//        int size = allStates.size();
+//        for (int i = size - 1; i >= 0; i--) {
+//            State s = allStates.get(i);
+//
+//            if (check.isChallenged(state, side)) {
+//                allStates.remove(i);
+//            }
+//        }
+//        return allStates;
+//    }
 
     /**
      * Switch to the correct function based on the type of piece
@@ -129,6 +133,14 @@ public class MoveGenerator {
         return states;
     }
 
+    /**
+     * Generate the moves for a bishop
+     *
+     * @param rank the rank of the bishop 0-7
+     * @param file the file of the bishop 0-7
+     * @param side the side, 1 for white, -1 for black
+     * @return a list of all possible moves for a bishop from the given location
+     */
     public ArrayList<State> bishop(int rank, int file, byte side) {
         ArrayList<State> states = new ArrayList();
         State state;
@@ -138,10 +150,14 @@ public class MoveGenerator {
             state = new State(current);
             if (piece == 0) {
                 state.setState((byte) rank, (byte) file, (byte) i, (byte) j, (byte) (side * 3));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+                    states.add(state);
+                }
             } else if (piece * side < 0) {
                 state.setState((byte) rank, (byte) file, (byte) i, (byte) j, (byte) (side * 3));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+                    states.add(state);
+                }
                 break;
             } else {
                 break;
@@ -153,10 +169,16 @@ public class MoveGenerator {
 
             if (piece == 0) {
                 state.setState((byte) rank, (byte) file, (byte) i, (byte) j, (byte) (side * 3));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
             } else if (piece * side < 0) {
                 state.setState((byte) rank, (byte) file, (byte) i, (byte) j, (byte) (side * 3));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
                 break;
             } else {
                 break;
@@ -168,10 +190,16 @@ public class MoveGenerator {
 
             if (piece == 0) {
                 state.setState((byte) rank, (byte) file, (byte) i, (byte) j, (byte) (side * 3));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
             } else if (piece * side < 0) {
                 state.setState((byte) rank, (byte) file, (byte) i, (byte) j, (byte) (side * 3));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
                 break;
             } else {
                 break;
@@ -183,10 +211,16 @@ public class MoveGenerator {
 
             if (piece == 0) {
                 state.setState((byte) rank, (byte) file, (byte) i, (byte) j, (byte) (side * 3));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
             } else if (piece * side < 0) {
                 state.setState((byte) rank, (byte) file, (byte) i, (byte) j, (byte) (side * 3));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
                 break;
             } else {
                 break;
@@ -196,6 +230,14 @@ public class MoveGenerator {
         return states;
     }
 
+    /**
+     * Generate the moves for a king
+     *
+     * @param rank the rank of the king 0-7
+     * @param file the file of the king 0-7
+     * @param side the side, 1 for white, -1 for black
+     * @return a list of all possible moves for a king from the given location
+     */
     public ArrayList<State> king(int rank, int file, byte side) {
         ArrayList<State> states = new ArrayList();
         State state;
@@ -205,10 +247,9 @@ public class MoveGenerator {
             if (piece * side <= 0) {
                 state = new State(current);
                 state.setState((byte) rank, (byte) file, (byte) (rank - 1), (byte) file, (byte) side);
-                if (!check.isChallenged(state.board, rank - 1, file, side)) {
-                    state.setKingPos(side, new Position((byte) (rank - 1), (byte) (file)));
+                state.setKingPos(side, new Position((byte) (rank - 1), (byte) (file)));
+                if (!check.isChallenged(state, side)) {
                     states.add(state);
-
                 }
             }
             if (file > 0) {
@@ -216,8 +257,8 @@ public class MoveGenerator {
                 if (piece * side <= 0) {
                     state = new State(current);
                     state.setState((byte) rank, (byte) file, (byte) (rank - 1), (byte) (file - 1), (byte) side);
-                    if (!check.isChallenged(state.board, rank - 1, file - 1, side)) {
-                        state.setKingPos(side, new Position((byte) (rank - 1), (byte) (file - 1)));
+                    state.setKingPos(side, new Position((byte) (rank - 1), (byte) (file - 1)));
+                    if (!check.isChallenged(state, side)) {
                         states.add(state);
                     }
                 }
@@ -227,8 +268,8 @@ public class MoveGenerator {
                 if (piece * side <= 0) {
                     state = new State(current);
                     state.setState((byte) rank, (byte) file, (byte) (rank - 1), (byte) (file + 1), (byte) side);
-                    if (!check.isChallenged(state.board, rank - 1, file + 1, side)) {
-                        state.setKingPos(side, new Position((byte) (rank - 1), (byte) (file + 1)));
+                    state.setKingPos(side, new Position((byte) (rank - 1), (byte) (file + 1)));
+                    if (!check.isChallenged(state, side)) {
                         states.add(state);
                     }
                 }
@@ -239,8 +280,8 @@ public class MoveGenerator {
             if (piece * side <= 0) {
                 state = new State(current);
                 state.setState((byte) rank, (byte) file, (byte) (rank + 1), (byte) file, (byte) side);
-                if (!check.isChallenged(state.board, rank + 1, file, side)) {
-                    state.setKingPos(side, new Position((byte) (rank + 1), (byte) (file)));
+                state.setKingPos(side, new Position((byte) (rank + 1), (byte) (file)));
+                if (!check.isChallenged(state, side)) {
                     states.add(state);
                 }
             }
@@ -249,8 +290,8 @@ public class MoveGenerator {
                 if (piece * side <= 0) {
                     state = new State(current);
                     state.setState((byte) rank, (byte) file, (byte) (rank + 1), (byte) (file - 1), (byte) side);
-                    if (!check.isChallenged(state.board, rank + 1, file - 1, side)) {
-                        state.setKingPos(side, new Position((byte) (rank + 1), (byte) (file - 1)));
+                    state.setKingPos(side, new Position((byte) (rank + 1), (byte) (file - 1)));
+                    if (!check.isChallenged(state, side)) {
                         states.add(state);
                     }
                 }
@@ -260,8 +301,9 @@ public class MoveGenerator {
                 if (piece * side <= 0) {
                     state = new State(current);
                     state.setState((byte) rank, (byte) file, (byte) (rank + 1), (byte) (file + 1), (byte) side);
-                    if (!check.isChallenged(state.board, rank + 1, file + 1, side)) {
-                        state.setKingPos(side, new Position((byte) (rank + 1), (byte) (file + 1)));
+                    state.setKingPos(side, new Position((byte) (rank + 1), (byte) (file + 1)));
+                    if (!check.isChallenged(state, side)) {
+
                         states.add(state);
                     }
                 }
@@ -272,8 +314,9 @@ public class MoveGenerator {
             if (piece * side <= 0) {
                 state = new State(current);
                 state.setState((byte) rank, (byte) file, (byte) rank, (byte) (file - 1), (byte) side);
-                if (!check.isChallenged(state.board, rank, file - 1, side)) {
-                    state.setKingPos(side, new Position((byte) (rank), (byte) (file - 1)));
+                state.setKingPos(side, new Position((byte) (rank), (byte) (file - 1)));
+                if (!check.isChallenged(state, side)) {
+
                     states.add(state);
                 }
             }
@@ -283,21 +326,25 @@ public class MoveGenerator {
             if (piece * side <= 0) {
                 state = new State(current);
                 state.setState((byte) rank, (byte) file, (byte) rank, (byte) (file + 1), (byte) side);
-                if (!check.isChallenged(state.board, rank, file + 1, side)) {
-                    state.setKingPos(side, new Position((byte) (rank), (byte) (file + 1)));
+                state.setKingPos(side, new Position((byte) (rank), (byte) (file + 1)));
+                if (!check.isChallenged(state, side)) {
+
                     states.add(state);
                 }
             }
         }
-//        } else if (dRank == 0 && dFile == 2) {
-//            if (!check.isChallenged(fromRank, fromFile, side)
-//                    && !check.isChallenged(fromRank, fromFile + dir, side)
-//                    && !check.isChallenged(dRank, toFile, side)) {
-//                return type.CASTLE;
-//            }
+
         return states;
     }
 
+    /**
+     * Generate the moves for a knight
+     *
+     * @param rank the rank of the knight 0-7
+     * @param file the file of the knight 0-7
+     * @param side the side, 1 for white, -1 for black
+     * @return a list of all possible moves for a knight from the given location
+     */
     public ArrayList<State> knight(int rank, int file, byte side) {
         ArrayList<State> states = new ArrayList();
         State state;
@@ -307,7 +354,10 @@ public class MoveGenerator {
             if (current.getPiece(rank + 1, file + 2) * side <= 0) {
                 state = new State(current);
                 state.setState((byte) rank, (byte) file, (byte) (rank + 1), (byte) (file + 2), (byte) (side * 4));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
             }
         }
 
@@ -315,7 +365,10 @@ public class MoveGenerator {
             if (current.getPiece(rank - 1, file + 2) * side <= 0) {
                 state = new State(current);
                 state.setState((byte) rank, (byte) file, (byte) (rank - 1), (byte) (file + 2), (byte) (side * 4));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
             }
         }
 
@@ -323,7 +376,10 @@ public class MoveGenerator {
             if (current.getPiece(rank + 1, file - 2) * side <= 0) {
                 state = new State(current);
                 state.setState((byte) rank, (byte) file, (byte) (rank + 1), (byte) (file - 2), (byte) (side * 4));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
             }
         }
 
@@ -331,7 +387,10 @@ public class MoveGenerator {
             if (current.getPiece(rank - 1, file - 2) * side <= 0) {
                 state = new State(current);
                 state.setState((byte) rank, (byte) file, (byte) (rank - 1), (byte) (file - 2), (byte) (side * 4));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
             }
         }
 
@@ -339,7 +398,10 @@ public class MoveGenerator {
             if (current.getPiece(rank + 2, file + 1) * side <= 0) {
                 state = new State(current);
                 state.setState((byte) rank, (byte) file, (byte) (rank + 2), (byte) (file + 1), (byte) (side * 4));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
             }
         }
 
@@ -347,7 +409,10 @@ public class MoveGenerator {
             if (current.getPiece(rank - 2, file + 1) * side <= 0) {
                 state = new State(current);
                 state.setState((byte) rank, (byte) file, (byte) (rank - 2), (byte) (file + 1), (byte) (side * 4));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
             }
         }
 
@@ -355,7 +420,10 @@ public class MoveGenerator {
             if (current.getPiece(rank + 2, file - 1) * side <= 0) {
                 state = new State(current);
                 state.setState((byte) rank, (byte) file, (byte) (rank + 2), (byte) (file - 1), (byte) (side * 4));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
             }
         }
 
@@ -363,13 +431,24 @@ public class MoveGenerator {
             if (current.getPiece(rank - 2, file - 1) * side <= 0) {
                 state = new State(current);
                 state.setState((byte) rank, (byte) file, (byte) (rank - 2), (byte) (file - 1), (byte) (side * 4));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
             }
         }
 
         return states;
     }
 
+    /**
+     * Generate the moves for a rook
+     *
+     * @param rank the rank of the rook 0-7
+     * @param file the file of the rook 0-7
+     * @param side the side, 1 for white, -1 for black
+     * @return a list of all possible moves for a rook from the given location
+     */
     public ArrayList<State> rook(int rank, int file, byte side) {
         ArrayList<State> states = new ArrayList();
         State state;
@@ -380,10 +459,16 @@ public class MoveGenerator {
             state = new State(current);
             if (piece == 0) {
                 state.setState((byte) rank, (byte) file, (byte) i, (byte) file, (byte) (side * 5));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
             } else if (piece * side < 0) {
                 state.setState((byte) rank, (byte) file, (byte) i, (byte) file, (byte) (side * 5));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
                 break;
             } else {
                 break;
@@ -394,10 +479,16 @@ public class MoveGenerator {
             state = new State(current);
             if (piece == 0) {
                 state.setState((byte) rank, (byte) file, (byte) rank, (byte) i, (byte) (side * 5));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
             } else if (piece * side < 0) {
                 state.setState((byte) rank, (byte) file, (byte) rank, (byte) i, (byte) (side * 5));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
                 break;
             } else {
                 break;
@@ -408,10 +499,16 @@ public class MoveGenerator {
             state = new State(current);
             if (piece == 0) {
                 state.setState((byte) rank, (byte) file, (byte) i, (byte) file, (byte) (side * 5));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
             } else if (piece * side < 0) {
                 state.setState((byte) rank, (byte) file, (byte) i, (byte) file, (byte) (side * 5));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
                 break;
             } else {
                 break;
@@ -422,10 +519,14 @@ public class MoveGenerator {
             state = new State(current);
             if (piece == 0) {
                 state.setState((byte) rank, (byte) file, (byte) rank, (byte) i, (byte) (side * 5));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+                    states.add(state);
+                }
             } else if (piece * side < 0) {
                 state.setState((byte) rank, (byte) file, (byte) rank, (byte) i, (byte) (side * 5));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+                    states.add(state);
+                }
                 break;
             } else {
                 break;
@@ -434,6 +535,14 @@ public class MoveGenerator {
         return states;
     }
 
+    /**
+     * Generate the moves for a queen
+     *
+     * @param rank the rank of the queen0-7
+     * @param file the file of the queen 0-7
+     * @param side the side, 1 for white, -1 for black
+     * @return a list of all possible moves for a queen from the given location
+     */
     public ArrayList<State> queen(int rank, int file, byte side) {
         ArrayList<State> states = new ArrayList();
         State state;
@@ -443,10 +552,14 @@ public class MoveGenerator {
             state = new State(current);
             if (piece == 0) {
                 state.setState((byte) rank, (byte) file, (byte) i, (byte) j, (byte) (side * 2));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+                    states.add(state);
+                }
             } else if (piece * side < 0) {
                 state.setState((byte) rank, (byte) file, (byte) i, (byte) j, (byte) (side * 2));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+                    states.add(state);
+                }
                 break;
             } else {
                 break;
@@ -455,13 +568,18 @@ public class MoveGenerator {
         for (int i = rank + 1, j = file - 1; i < 8 && j >= 0; i++, j--) {
             piece = current.getPiece(i, j);
             state = new State(current);
-
             if (piece == 0) {
                 state.setState((byte) rank, (byte) file, (byte) i, (byte) j, (byte) (side * 2));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
             } else if (piece * side < 0) {
                 state.setState((byte) rank, (byte) file, (byte) i, (byte) j, (byte) (side * 2));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
                 break;
             } else {
                 break;
@@ -473,10 +591,16 @@ public class MoveGenerator {
 
             if (piece == 0) {
                 state.setState((byte) rank, (byte) file, (byte) i, (byte) j, (byte) (side * 2));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
             } else if (piece * side < 0) {
                 state.setState((byte) rank, (byte) file, (byte) i, (byte) j, (byte) (side * 2));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
                 break;
             } else {
                 break;
@@ -488,10 +612,16 @@ public class MoveGenerator {
 
             if (piece == 0) {
                 state.setState((byte) rank, (byte) file, (byte) i, (byte) j, (byte) (side * 2));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
             } else if (piece * side < 0) {
                 state.setState((byte) rank, (byte) file, (byte) i, (byte) j, (byte) (side * 2));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
                 break;
             } else {
                 break;
@@ -502,10 +632,16 @@ public class MoveGenerator {
             state = new State(current);
             if (piece == 0) {
                 state.setState((byte) rank, (byte) file, (byte) i, (byte) file, (byte) (side * 2));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
             } else if (piece * side < 0) {
                 state.setState((byte) rank, (byte) file, (byte) i, (byte) file, (byte) (side * 2));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
                 break;
             } else {
                 break;
@@ -516,10 +652,16 @@ public class MoveGenerator {
             state = new State(current);
             if (piece == 0) {
                 state.setState((byte) rank, (byte) file, (byte) rank, (byte) i, (byte) (side * 2));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
             } else if (piece * side < 0) {
                 state.setState((byte) rank, (byte) file, (byte) rank, (byte) i, (byte) (side * 2));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
                 break;
             } else {
                 break;
@@ -530,10 +672,16 @@ public class MoveGenerator {
             state = new State(current);
             if (piece == 0) {
                 state.setState((byte) rank, (byte) file, (byte) i, (byte) file, (byte) (side * 2));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
             } else if (piece * side < 0) {
                 state.setState((byte) rank, (byte) file, (byte) i, (byte) file, (byte) (side * 2));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
                 break;
             } else {
                 break;
@@ -544,10 +692,16 @@ public class MoveGenerator {
             state = new State(current);
             if (piece == 0) {
                 state.setState((byte) rank, (byte) file, (byte) rank, (byte) i, (byte) (side * 2));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
             } else if (piece * side < 0) {
                 state.setState((byte) rank, (byte) file, (byte) rank, (byte) i, (byte) (side * 2));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+
+                    states.add(state);
+                }
                 break;
             } else {
                 break;
@@ -557,6 +711,14 @@ public class MoveGenerator {
         return states;
     }
 
+    /**
+     * Generate the moves for a pawn
+     *
+     * @param rank the rank of the pawn 0-7
+     * @param file the file of the pawn 0-7
+     * @param side the side, 1 for white, -1 for black
+     * @return a list of all possible moves for a pawn from the given location
+     */
     public ArrayList<State> pawn(int rank, int file, byte side) {
         ArrayList<State> states = new ArrayList();
         State state;
@@ -568,7 +730,9 @@ public class MoveGenerator {
             if (piece1 == 0 && piece2 == 0) {
                 state = new State(current);
                 state.setState((byte) rank, (byte) file, (byte) (rank + 2), (byte) file, (byte) 6);
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+                    states.add(state);
+                }
             }
         }
         if (rank == 6 && side == -1) {
@@ -578,7 +742,9 @@ public class MoveGenerator {
             if (piece1 == 0 && piece2 == 0) {
                 state = new State(current);
                 state.setState((byte) rank, (byte) file, (byte) (rank - 2), (byte) file, (byte) -6);
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+                    states.add(state);
+                }
             }
 
         }
@@ -588,10 +754,14 @@ public class MoveGenerator {
             state = new State(current);
             if (rank + side == 7 || rank + side == 0) {
                 state.setState((byte) rank, (byte) file, (byte) (rank + side), (byte) file, (byte) (side * 2));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+                    states.add(state);
+                }
             } else if (!(rank == 7 || rank == 0)) {
                 state.setState((byte) rank, (byte) file, (byte) (rank + side), (byte) file, (byte) (side * 6));
-                states.add(state);
+                if (!check.isChallenged(state, side)) {
+                    states.add(state);
+                }
             }
         }
 
@@ -601,10 +771,14 @@ public class MoveGenerator {
                 state = new State(current);
                 if (rank + side == 7 || rank + side == 0) {
                     state.setState((byte) rank, (byte) file, (byte) (rank + side), (byte) (file + 1), (byte) (side * 2));
-                    states.add(state);
+                    if (!check.isChallenged(state, side)) {
+                        states.add(state);
+                    }
                 } else {
                     state.setState((byte) rank, (byte) file, (byte) (rank + side), (byte) (file + 1), (byte) (side * 6));
-                    states.add(state);
+                    if (!check.isChallenged(state, side)) {
+                        states.add(state);
+                    }
                 }
 
             }
@@ -616,10 +790,14 @@ public class MoveGenerator {
                 state = new State(current);
                 if (rank + side == 7 || rank + side == 0) {
                     state.setState((byte) rank, (byte) file, (byte) (rank + side), (byte) (file - 1), (byte) (side * 2));
-                    states.add(state);
+                    if (!check.isChallenged(state, side)) {
+                        states.add(state);
+                    }
                 } else {
                     state.setState((byte) rank, (byte) file, (byte) (rank + side), (byte) (file - 1), (byte) (side * 6));
-                    states.add(state);
+                    if (!check.isChallenged(state, side)) {
+                        states.add(state);
+                    }
                 }
             }
         }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="16" failures="0" name="chessboard.CheckTest" time="0.005" errors="0" skipped="0">
+<testsuite tests="3" failures="0" name="engine.MinimaxTest" time="3.785" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="11.0.2+9-LTS"/>
@@ -61,20 +61,7 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="chessboard.CheckTest" name="rooksChallengeCorrectly1" time="0"/>
-  <testcase classname="chessboard.CheckTest" name="rooksChallengeCorrectly2" time="0"/>
-  <testcase classname="chessboard.CheckTest" name="bishopsChallengeCorrectly1" time="0.001"/>
-  <testcase classname="chessboard.CheckTest" name="bishopsChallengeCorrectly2" time="0"/>
-  <testcase classname="chessboard.CheckTest" name="returnsFalseWithEmptyBoard" time="0"/>
-  <testcase classname="chessboard.CheckTest" name="queensChallengeCorrectly1" time="0"/>
-  <testcase classname="chessboard.CheckTest" name="queensChallengeCorrectly2" time="0.001"/>
-  <testcase classname="chessboard.CheckTest" name="whitePawnsChallengeCorrectly" time="0"/>
-  <testcase classname="chessboard.CheckTest" name="pawnsDontChallengeSameColour" time="0.001"/>
-  <testcase classname="chessboard.CheckTest" name="blackPawnsChallengeCorrectly" time="0"/>
-  <testcase classname="chessboard.CheckTest" name="rooksCannotChallengeThroughPieces" time="0"/>
-  <testcase classname="chessboard.CheckTest" name="knightsChallengeCorrectly" time="0"/>
-  <testcase classname="chessboard.CheckTest" name="bishopsCannotChallengeThroughPieces" time="0"/>
-  <testcase classname="chessboard.CheckTest" name="kingChallengesCorrectly" time="0.001"/>
-  <testcase classname="chessboard.CheckTest" name="queensCannotChallengeThroughPieces1" time="0"/>
-  <testcase classname="chessboard.CheckTest" name="queensCannotChallengeThroughPieces2" time="0.001"/>
+  <testcase classname="engine.MinimaxTest" name="whiteWillFindMateInFive" time="3.785"/>
+  <testcase classname="engine.MinimaxTest" name="willAlwaysCaptureWithDepthZero1" time="0"/>
+  <testcase classname="engine.MinimaxTest" name="willAlwaysCaptureWithDepthZero2" time="0"/>
 </testsuite>

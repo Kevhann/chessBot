@@ -5,9 +5,9 @@
  */
 package chessboard;
 
+import engine.Check;
 import utils.Move;
 import engine.MoveChecker;
-import utils.IllegalMoveException;
 import utils.MoveType;
 import utils.Position;
 
@@ -80,7 +80,7 @@ public class Chessboard {
      * @param turn the turn of the player, 1 for white, -1 for black
      * @throws IllegalMoveException if the move is invalid
      */
-    public void move(Move move, byte turn) throws IllegalMoveException {
+    public void move(Move move, byte turn) throws IllegalArgumentException {
         byte fromRank = move.getFromRank();
         byte fromFile = move.getFromFile();
         byte toRank = move.getToRank();
@@ -89,7 +89,7 @@ public class Chessboard {
         byte currentPiece = board[(fromRank * 8) + fromFile];
         int piecetype = currentPiece * turn;
         if (piecetype <= 0) {
-            throw new IllegalMoveException("Illegal move");
+            throw new IllegalArgumentException("Illegal move");
         }
 
         MoveType moveType;
@@ -131,7 +131,7 @@ public class Chessboard {
                 //todo
                 System.out.println("case enpassant");
             case ILLEGAL:
-                throw new IllegalMoveException("Unvalid Move");
+                throw new IllegalArgumentException("Unvalid Move");
             default:
 
                 if (piecetype == 1) {
@@ -139,7 +139,7 @@ public class Chessboard {
                 }
 
                 if (check.isChallenged(board, getKingPos(turn), turn)) {
-                    throw new IllegalMoveException("King cannot move");
+                    throw new IllegalArgumentException("King cannot move");
                 } else {
                     if (piecetype == 6) {
                         if (toRank == 0 || toRank == 7) {

@@ -1,5 +1,8 @@
+engine/MoveCheckerTest.class
 chessboard/MoveTest.class
-pieces/MoveCheckerTest.class
-chessboard/CheckTest.class
-pieces/MoveGeneratorTest.class
+engine/MoveGeneratorTest.class
+structures/CustomListTest.class
+engine/CheckTest.class
+chessboard/StateTest.class
+engine/MinimaxTest.class
 chessboard/ChessBoardTest.class

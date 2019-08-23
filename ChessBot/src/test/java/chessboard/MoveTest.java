@@ -6,7 +6,6 @@
 package chessboard;
 
 import utils.Move;
-import utils.IllegalMoveException;
 import chessboard.*;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -51,7 +50,7 @@ public class MoveTest {
         assertEquals(0, (byte) board.pieceOnBoard("a3"));
         try {
             board.move(legalWhiteMove, (byte) 1);
-        } catch (IllegalMoveException e) {
+        } catch (IllegalArgumentException e) {
         }
         assertEquals(6, (byte) board.pieceOnBoard("a3"));
     }
@@ -61,7 +60,7 @@ public class MoveTest {
         assertEquals(0, (byte) board.pieceOnBoard("a3"));
         try {
             board.move(legalBlackMove, (byte) 1);
-        } catch (IllegalMoveException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e);
         }
         assertEquals(0, (byte) board.pieceOnBoard("a3"));

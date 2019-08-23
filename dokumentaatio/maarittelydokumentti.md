@@ -19,7 +19,7 @@ Lopuksi laillisuuden testaamiseksi jokaiselle luodulle siirrolle täytyy testata
 
 Shakki-matti tarkastetaan samalla tavalla. Jos laillisten siirtojen lukumäärä on 0, kyseessä on shakki-matti.
 
-Kentän 'hyvyyden' arvioimisen aikavaativuus yksinkertaisella Minimax-algoritmilla on O(d^n), jossa n mahdollisten siirtojen lukumäärä ja d tutkittava syvyys. Aikavaativuus kasvaa hyvin nopeasti, joten tutkittava syvyys on hyvin rajoitettu tällä lähestymistavalla. Tästä olisi tarkoitus parantaa huomattavasti karsimalla pois 'tiedettävästi huonoja' siirtoja, joiden jälkeläisiä ei enää tarvitse tutkia.
+Kentän 'hyvyyden' arvioimisen aikavaativuus yksinkertaisella Minimax-algoritmilla on O(n^d), jossa n mahdollisten siirtojen lukumäärä ja d tutkittava syvyys. Aikavaativuus kasvaa hyvin nopeasti, joten tutkittava syvyys on hyvin rajoitettu tällä lähestymistavalla. Tästä olisi tarkoitus parantaa huomattavasti karsimalla pois 'tiedettävästi huonoja' siirtoja, joiden jälkeläisiä ei enää tarvitse tutkia.
 
 Lähteet:
 

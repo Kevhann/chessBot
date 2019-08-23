@@ -20,15 +20,20 @@ public class Minimax {
     public Minimax(MoveGenerator g) {
         this.gen = g;
     }
-    
+
     /**
      * Evaluates the best move using minimax to a given depth and returns it
+     *
      * @param depth
      * @return The best move evaluated with minimax
      */
-     public State minimaxTurn(int depth, byte side) {
+    public State minimaxTurn(int depth, byte side) {
         ArrayList<State> states = gen.getAll(side);
         
+        if (states.isEmpty()) {
+            return null;
+        }
+
         Collections.shuffle(states);
         int min = 99999;
         int mini = 0;
@@ -39,7 +44,6 @@ public class Minimax {
             State temp = states.get(i);
             int score = minimax(temp, side == -1, depth, -99999, 99999);
             temp.setScore(score);
-
             if (score < min) {
                 min = score;
                 mini = i;
@@ -58,7 +62,6 @@ public class Minimax {
         }
     }
 
-
     /**
      * Depth-limited search algorithm using alpha-beta pruning
      *
@@ -70,21 +73,18 @@ public class Minimax {
      * @return the minimax value
      */
     public int minimax(State state, boolean white, int depth, int alpha, int beta) {
-        
         if (depth == 0) {
             int value = state.evaluate();
             return value;
-        } 
-        
+        }
         ArrayList<State> states;
-        
+
         if (white) {
             states = gen.getAll(state, (byte) 1);
         } else {
             states = gen.getAll(state, (byte) -1);
         }
-        
-        
+
         if (states.isEmpty()) {
             if (white) {
                 return -99999;

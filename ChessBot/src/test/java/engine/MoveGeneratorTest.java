@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pieces;
+package engine;
 
 import engine.MoveChecker;
 import engine.MoveGenerator;
@@ -159,7 +159,4 @@ public class MoveGeneratorTest {
         board.addPiece((byte) -2, "d5");
         assertEquals(27, gen.getAll((byte) -1).size());
     }
-    
-    
-
 }

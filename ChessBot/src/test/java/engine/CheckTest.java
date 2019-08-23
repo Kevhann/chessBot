@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package chessboard;
+package engine;
 
+import chessboard.Chessboard;
+import engine.Check;
 import engine.MoveChecker;
 import org.junit.After;
 import org.junit.AfterClass;

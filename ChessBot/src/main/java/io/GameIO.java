@@ -5,12 +5,11 @@
  */
 package io;
 
-import chessboard.Check;
+import engine.Check;
 import chessboard.Chessboard;
 import utils.Move;
 import chessboard.State;
 import engine.Minimax;
-import utils.IllegalMoveException;
 import java.util.Scanner;
 import engine.MoveGenerator;
 
@@ -22,13 +21,13 @@ public class GameIO {
 
     private final String[] files = {"   ", " a ", " b ", " c ", " d ", " e ", " f ", " g ", " h "};
     private final String[] symbols = {" ♟ ", " ♜ ", " ♞ ", " ♝ ", " ♛ ", " ♚ ", "   ", " ♔ ", " ♕ ", " ♗ ", " ♘ ", " ♖ ", " ♙ "};
-    Chessboard board = new Chessboard();
+    public Chessboard board = new Chessboard();
     Scanner scanner = new Scanner(System.in);
     Move currentMove;
     byte turn = 1;
-    MoveGenerator gen = new MoveGenerator(board);
+    public MoveGenerator gen = new MoveGenerator(board);
     Check check = new Check();
-    Minimax minimax = new Minimax(gen);
+    public Minimax minimax = new Minimax(gen);
     int depth = 4;
     int count = 1;
 
@@ -80,10 +79,10 @@ public class GameIO {
     }
 
     public void gameMode2() {
-        System.out.println("Choose computer 'level' 0-6 (depth of search)");
+        System.out.println("Choose computer 'level' 0-5 (depth of search)");
         String input = scanner.nextLine();
 
-        if (!input.matches("0-6")) {
+        if (!input.matches("[0-5]")) {
             System.out.println("playing with default 'level 4");
         } else {
             depth = Integer.parseInt(input);
@@ -183,7 +182,7 @@ public class GameIO {
                     board.move(currentMove, turn);
                     turn *= -1;
                     break;
-                } catch (IllegalMoveException e) {
+                } catch (IllegalArgumentException e) {
                     System.out.println(e);
                 }
 

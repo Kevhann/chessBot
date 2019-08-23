@@ -5,18 +5,18 @@
  */
 package chessboard;
 
-import java.util.ArrayList;
+
 import utils.Position;
 
 /**
- *
+ * The State that is used to calculate all possible subsequent board states
+ * Each state contains the board position and positions for both kings
  * @author kevin
  */
 public class State implements Comparable<State> {
 
     public byte[] board;
     private int score;
-//    public Move move;
     private Position whiteKing;
     private Position blackKing;
 
