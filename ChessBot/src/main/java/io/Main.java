@@ -6,7 +6,6 @@
 package io;
 
 import chessboard.Chessboard;
-import io.GameIO;
 import chessboard.State;
 import engine.Minimax;
 import engine.MoveGenerator;

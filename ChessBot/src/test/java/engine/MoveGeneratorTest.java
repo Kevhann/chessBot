@@ -50,44 +50,44 @@ public class MoveGeneratorTest {
     @Test
     public void white20MovesAtStart() {
         board.addPieces();
-        assertEquals(20, gen.getAll((byte) 1).size());
+        assertEquals(20, gen.getAll((byte) 1).length());
     }
     
     @Test
     public void black20MovesAtStart() {
         board.addPieces();
-        assertEquals(20, gen.getAll((byte) -1).size());
+        assertEquals(20, gen.getAll((byte) -1).length());
     }
 
     @Test
     public void knightInCornerHasTwoMoves() {
         board.addPiece((byte) 4, "a1");
-        assertEquals(2, gen.getAll((byte) 1).size());
+        assertEquals(2, gen.getAll((byte) 1).length());
     }
 
     @Test
     public void knightInCenterHas8Moves() {
         board.addPiece((byte) 4, "d6");
-        assertEquals(8, gen.getAll((byte) 1).size());
+        assertEquals(8, gen.getAll((byte) 1).length());
     }
 
     @Test
     public void kingInCornerHas3Moves() {
         board.addPiece((byte) -1, "a1");
-        assertEquals(3, gen.getAll((byte) -1).size());
+        assertEquals(3, gen.getAll((byte) -1).length());
     }
 
     @Test
     public void kingInCenterHas8Moves() {
         board.addPiece((byte) -1, "d6");
-        assertEquals(8, gen.getAll((byte) -1).size());
+        assertEquals(8, gen.getAll((byte) -1).length());
     }
     
     @Test
     public void kingCannotMoveIntoChallengedSquares1() {
         board.addPiece((byte) -1, "d6");
         board.addPiece((byte) 6, "d4");
-        assertEquals(6, gen.getAll((byte) -1).size());
+        assertEquals(6, gen.getAll((byte) -1).length());
     }
     @Test
     public void kingCannotMoveIntoChallengedSquares2() {
@@ -97,7 +97,7 @@ public class MoveGeneratorTest {
         board.addPiece((byte) 6, "e3");
         board.addPiece((byte) 6, "d2");
         System.out.println("whiteking: " + board.getWhiteKing());
-        assertEquals(5, gen.getAll((byte) -1).size());
+        assertEquals(5, gen.getAll((byte) -1).length());
     }
     
     @Test
@@ -106,7 +106,7 @@ public class MoveGeneratorTest {
         board.setBlackKing(new Position("d3"));
         board.addPiece((byte) 5, "h2");
         board.addPiece((byte) 5, "h4");
-        assertEquals(2, gen.getAll((byte) -1).size());
+        assertEquals(2, gen.getAll((byte) -1).length());
     }
     
     @Test
@@ -115,13 +115,13 @@ public class MoveGeneratorTest {
         board.setWhiteKing(new Position("d3"));
         board.addPiece((byte) -5, "e8");
         board.addPiece((byte) -5, "c8");
-        assertEquals(2, gen.getAll((byte) 1).size());
+        assertEquals(2, gen.getAll((byte) 1).length());
     }
 
     @Test
     public void pawnsInStartingPositionHaveTwoMoves() {
         board.addPiece((byte) 6, "a2");
-        assertEquals(2, gen.getAll((byte) 1).size());
+        assertEquals(2, gen.getAll((byte) 1).length());
     }
     
     @Test
@@ -131,32 +131,32 @@ public class MoveGeneratorTest {
         board.addPiece((byte) 4, "c4");
         board.addPiece((byte) -1, "c6");
         board.addPiece((byte) -2, "d2");
-        assertEquals(0, gen.getAll((byte) -1).size());
+        assertEquals(0, gen.getAll((byte) -1).length());
     }
 
     @Test
     public void capturingWhitePawnHas3Moves() {
         board.addPiece((byte) 6, "d6");
-        assertEquals(1, gen.getAll((byte) 1).size());
+        assertEquals(1, gen.getAll((byte) 1).length());
         board.addPiece((byte) -4, "e7");
-        assertEquals(2, gen.getAll((byte) 1).size());
+        assertEquals(2, gen.getAll((byte) 1).length());
         board.addPiece((byte) -4, "c7");
-        assertEquals(3, gen.getAll((byte) 1).size());
+        assertEquals(3, gen.getAll((byte) 1).length());
     }
     
     @Test
     public void capturingBlackPawnHas3Moves() {
         board.addPiece((byte) -6, "d5");
-        assertEquals(1, gen.getAll((byte) -1).size());
+        assertEquals(1, gen.getAll((byte) -1).length());
         board.addPiece((byte) 4, "e4");
-        assertEquals(2, gen.getAll((byte) -1).size());
+        assertEquals(2, gen.getAll((byte) -1).length());
         board.addPiece((byte) 4, "c4");
-        assertEquals(3, gen.getAll((byte) -1).size());
+        assertEquals(3, gen.getAll((byte) -1).length());
     }
     
     @Test
     public void queenHas27MovesFromCentre() {
         board.addPiece((byte) -2, "d5");
-        assertEquals(27, gen.getAll((byte) -1).size());
+        assertEquals(27, gen.getAll((byte) -1).length());
     }
 }

@@ -113,6 +113,16 @@ public class CustomList<Type> {
     public int getAbsoluteSize() {
         return absoluteSize;
     }
+    
+    public boolean isEmpty() {
+        return length == 0;
+    }
+    
+    public void addAll(CustomList<Type> list) {
+        for (int i = 0; i < list.length(); i++) {
+            add(list.get(i));
+        }
+    }
 
     public void shuffle() {
         

@@ -1,6 +1,5 @@
-/home/kevin/tkt/chessBot/ChessBot/src/main/java/utils/IllegalMoveException.java
 /home/kevin/tkt/chessBot/ChessBot/src/main/java/engine/MoveChecker.java
-/home/kevin/tkt/chessBot/ChessBot/src/main/java/chessboard/Check.java
+/home/kevin/tkt/chessBot/ChessBot/src/main/java/engine/Check.java
 /home/kevin/tkt/chessBot/ChessBot/src/main/java/engine/Minimax.java
 /home/kevin/tkt/chessBot/ChessBot/src/main/java/io/Main.java
 /home/kevin/tkt/chessBot/ChessBot/src/main/java/utils/Move.java

@@ -6,8 +6,9 @@
 package engine;
 
 import chessboard.State;
-import java.util.ArrayList;
+import structures.CustomList;
 import java.util.Collections;
+
 
 /**
  *
@@ -28,19 +29,19 @@ public class Minimax {
      * @return The best move evaluated with minimax
      */
     public State minimaxTurn(int depth, byte side) {
-        ArrayList<State> states = gen.getAll(side);
+        CustomList<State> states = gen.getAll(side);
         
         if (states.isEmpty()) {
             return null;
         }
 
-        Collections.shuffle(states);
+//        Collections.shuffle(states);
         int min = 99999;
         int mini = 0;
         int max = -99999;
         int maxi = 0;
 
-        for (int i = 0; i < states.size(); i++) {
+        for (int i = 0; i < states.length(); i++) {
             State temp = states.get(i);
             int score = minimax(temp, side == -1, depth, -99999, 99999);
             temp.setScore(score);
@@ -77,7 +78,7 @@ public class Minimax {
             int value = state.evaluate();
             return value;
         }
-        ArrayList<State> states;
+        CustomList<State> states;
 
         if (white) {
             states = gen.getAll(state, (byte) 1);
@@ -96,7 +97,7 @@ public class Minimax {
         if (white) {
             int base = -99999;
 
-            int size = states.size();
+            int size = states.length();
             for (int i = 0; i < size; i++) {
                 int value = minimax(states.get(i), false, depth - 1, alpha, beta);
                 if (value > base) {
@@ -112,7 +113,7 @@ public class Minimax {
             return base;
         } else {
             int base = 99999;
-            int size = states.size();
+            int size = states.length();
             for (int i = 0; i < size; i++) {
                 int value = minimax(states.get(i), true, depth - 1, alpha, beta);
                 if (value < base) {

@@ -6,9 +6,8 @@
 package engine;
 
 import chessboard.*;
-import java.util.ArrayList;
 import java.util.Collections;
-import utils.Func;
+import structures.CustomList;
 import utils.*;
 
 /**
@@ -30,14 +29,14 @@ public class MoveGenerator {
     }
 
     public State getBestNextMove(byte side) {
-        ArrayList<State> states = getAll(side);
+        CustomList<State> states = getAll(side);
 
-        Collections.shuffle(states);
-        Collections.sort(states);
+//        Collections.shuffle(states);
+//        Collections.sort(states);
         if (side == 1) {
             return states.get(0);
         } else {
-            return states.get(states.size() - 1);
+            return states.get(states.length() - 1);
         }
     }
 
@@ -47,9 +46,9 @@ public class MoveGenerator {
      * @param side side of player
      * @return list of all legal moves
      */
-    public ArrayList<State> getAll(byte side) {
+    public CustomList<State> getAll(byte side) {
         this.current = board.getBoardState();
-        ArrayList<State> allStates = new ArrayList();
+        CustomList<State> allStates = new CustomList();
         for (int i = 0; i < 64; i++) {
             byte piece = current.getPiece(i);
             if (func.sign(piece) == side) {
@@ -57,7 +56,7 @@ public class MoveGenerator {
                 int rank = i / 8;
                 int file = i - (rank * 8);
 
-                ArrayList<State> states = pieceSwitch(piece, rank, file, side);
+                CustomList<State> states = pieceSwitch(piece, rank, file, side);
                 allStates.addAll(states);
             }
         }
@@ -71,8 +70,8 @@ public class MoveGenerator {
      * @param side side of player
      * @return list of all legal moves
      */
-    public ArrayList<State> getAll(State state, byte side) {
-        ArrayList<State> allStates = new ArrayList();
+    public CustomList<State> getAll(State state, byte side) {
+        CustomList<State> allStates = new CustomList();
         this.current = state;
 
         for (int i = 0; i < 64; i++) {
@@ -82,7 +81,7 @@ public class MoveGenerator {
                 int rank = i / 8;
                 int file = i - (rank * 8);
 
-                ArrayList<State> states = pieceSwitch(piece, rank, file, side);
+                CustomList<State> states = pieceSwitch(piece, rank, file, side);
                 allStates.addAll(states);
             }
         }
@@ -91,7 +90,7 @@ public class MoveGenerator {
 
     }
 
-//    public ArrayList<State> removeStatesInCheck(ArrayList<State> allStates, byte side) {
+//    public CustomList<State> removeStatesInCheck(CustomList<State> allStates, byte side) {
 //        int size = allStates.size();
 //        for (int i = size - 1; i >= 0; i--) {
 //            State s = allStates.get(i);
@@ -112,9 +111,9 @@ public class MoveGenerator {
      * @param side the side of the player (1 for white, -1 for black)
      * @return A list of possible moves for the piece
      */
-    public ArrayList<State> pieceSwitch(byte piece, int rank, int file, byte side) {
+    public CustomList<State> pieceSwitch(byte piece, int rank, int file, byte side) {
 
-        ArrayList<State> states = new ArrayList();
+        CustomList<State> states = new CustomList();
         int type = side * piece;
         switch (type) {
             case 1:
@@ -141,8 +140,8 @@ public class MoveGenerator {
      * @param side the side, 1 for white, -1 for black
      * @return a list of all possible moves for a bishop from the given location
      */
-    public ArrayList<State> bishop(int rank, int file, byte side) {
-        ArrayList<State> states = new ArrayList();
+    public CustomList<State> bishop(int rank, int file, byte side) {
+        CustomList<State> states = new CustomList();
         State state;
         byte piece;
         for (int i = rank - 1, j = file - 1; i >= 0 && j >= 0; i--, j--) {
@@ -238,8 +237,8 @@ public class MoveGenerator {
      * @param side the side, 1 for white, -1 for black
      * @return a list of all possible moves for a king from the given location
      */
-    public ArrayList<State> king(int rank, int file, byte side) {
-        ArrayList<State> states = new ArrayList();
+    public CustomList<State> king(int rank, int file, byte side) {
+        CustomList<State> states = new CustomList();
         State state;
         byte piece;
         if (rank > 0) {
@@ -345,8 +344,8 @@ public class MoveGenerator {
      * @param side the side, 1 for white, -1 for black
      * @return a list of all possible moves for a knight from the given location
      */
-    public ArrayList<State> knight(int rank, int file, byte side) {
-        ArrayList<State> states = new ArrayList();
+    public CustomList<State> knight(int rank, int file, byte side) {
+        CustomList<State> states = new CustomList();
         State state;
         byte piece;
 
@@ -449,8 +448,8 @@ public class MoveGenerator {
      * @param side the side, 1 for white, -1 for black
      * @return a list of all possible moves for a rook from the given location
      */
-    public ArrayList<State> rook(int rank, int file, byte side) {
-        ArrayList<State> states = new ArrayList();
+    public CustomList<State> rook(int rank, int file, byte side) {
+        CustomList<State> states = new CustomList();
         State state;
         byte piece;
 
@@ -543,8 +542,8 @@ public class MoveGenerator {
      * @param side the side, 1 for white, -1 for black
      * @return a list of all possible moves for a queen from the given location
      */
-    public ArrayList<State> queen(int rank, int file, byte side) {
-        ArrayList<State> states = new ArrayList();
+    public CustomList<State> queen(int rank, int file, byte side) {
+        CustomList<State> states = new CustomList();
         State state;
         byte piece;
         for (int i = rank - 1, j = file - 1; i >= 0 && j >= 0; i--, j--) {
@@ -719,8 +718,8 @@ public class MoveGenerator {
      * @param side the side, 1 for white, -1 for black
      * @return a list of all possible moves for a pawn from the given location
      */
-    public ArrayList<State> pawn(int rank, int file, byte side) {
-        ArrayList<State> states = new ArrayList();
+    public CustomList<State> pawn(int rank, int file, byte side) {
+        CustomList<State> states = new CustomList();
         State state;
         byte piece;
         if (rank == 1 && side == 1) {
