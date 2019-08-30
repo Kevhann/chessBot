@@ -60,7 +60,7 @@
                     <targetClasses>
                         <param>chessboard.*</param>
                         <param>structures.*</param>
-                        <param>engine.*</param>
+                        <!--<param>engine.*</param>-->
                     </targetClasses>
                     <targetTests>
                         <param>chessboard.*</param>

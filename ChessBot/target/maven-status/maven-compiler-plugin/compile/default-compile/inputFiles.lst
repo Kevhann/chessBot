@@ -3,6 +3,7 @@
 /home/kevin/tkt/chessBot/ChessBot/src/main/java/engine/Minimax.java
 /home/kevin/tkt/chessBot/ChessBot/src/main/java/io/Main.java
 /home/kevin/tkt/chessBot/ChessBot/src/main/java/utils/Move.java
+/home/kevin/tkt/chessBot/ChessBot/src/main/java/utils/MoveGeneratorTester.java
 /home/kevin/tkt/chessBot/ChessBot/src/main/java/utils/Func.java
 /home/kevin/tkt/chessBot/ChessBot/src/main/java/io/GameIO.java
 /home/kevin/tkt/chessBot/ChessBot/src/main/java/utils/Position.java

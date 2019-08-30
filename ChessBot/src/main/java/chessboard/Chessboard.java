@@ -121,15 +121,10 @@ public class Chessboard {
             default:
                 System.out.println("switch case default");
                 moveType = MoveType.ILLEGAL;
-
         }
-
-        System.out.println("Movetype: " + moveType);
-
         switch (moveType) {
             case ENPASSANT:
                 //todo
-                System.out.println("case enpassant");
             case ILLEGAL:
                 throw new IllegalArgumentException("Unvalid Move");
             default:

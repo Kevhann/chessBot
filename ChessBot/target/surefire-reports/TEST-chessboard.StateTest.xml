@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="3" failures="0" name="chessboard.StateTest" time="0" errors="0" skipped="0">
+<testsuite tests="4" failures="0" name="chessboard.StateTest" time="0" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="11.0.2+9-LTS"/>
@@ -64,4 +64,5 @@
   <testcase classname="chessboard.StateTest" name="calculateCorrectStateScore1" time="0"/>
   <testcase classname="chessboard.StateTest" name="calculateCorrectStateScore2" time="0"/>
   <testcase classname="chessboard.StateTest" name="calculateCorrectStateScore3" time="0"/>
+  <testcase classname="chessboard.StateTest" name="createStateFromState" time="0"/>
 </testsuite>

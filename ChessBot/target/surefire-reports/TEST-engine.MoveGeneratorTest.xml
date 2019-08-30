@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="15" failures="0" name="engine.MoveGeneratorTest" time="0.001" errors="0" skipped="0">
+<testsuite tests="15" failures="0" name="engine.MoveGeneratorTest" time="0.003" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="11.0.2+9-LTS"/>
@@ -70,7 +70,7 @@
   <testcase classname="engine.MoveGeneratorTest" name="knightInCenterHas8Moves" time="0"/>
   <testcase classname="engine.MoveGeneratorTest" name="pawnsInStartingPositionHaveTwoMoves" time="0"/>
   <testcase classname="engine.MoveGeneratorTest" name="kingCannotMoveIntoChallengedSquares1" time="0"/>
-  <testcase classname="engine.MoveGeneratorTest" name="kingCannotMoveIntoChallengedSquares2" time="0.001"/>
+  <testcase classname="engine.MoveGeneratorTest" name="kingCannotMoveIntoChallengedSquares2" time="0.003"/>
   <testcase classname="engine.MoveGeneratorTest" name="kingCannotMoveIntoChallengedSquares3" time="0"/>
   <testcase classname="engine.MoveGeneratorTest" name="kingCannotMoveIntoChallengedSquares4" time="0"/>
   <testcase classname="engine.MoveGeneratorTest" name="knightInCornerHasTwoMoves" time="0"/>

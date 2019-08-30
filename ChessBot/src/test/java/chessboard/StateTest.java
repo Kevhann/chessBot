@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import utils.Position;
 
 /**
  *
@@ -78,5 +79,15 @@ public class StateTest {
         assertEquals(160, state.evaluate());
     }
     
+    @Test
+    public void createStateFromState() {
+        
+        state.setBlackKing(new Position("d1"));
+        state.setWhiteKing(new Position("c4"));
+        State newState = new State(state);
+        
+        assertEquals(3, newState.getBlackKing().getPos());
+        assertEquals(26, newState.getWhiteKing().getPos());
+    }
     
 }

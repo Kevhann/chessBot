@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="20" failures="0" name="engine.MoveCheckerTest" time="0" errors="0" skipped="0">
+<testsuite tests="20" failures="0" name="engine.MoveCheckerTest" time="0.008" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="11.0.2+9-LTS"/>
@@ -74,7 +74,7 @@
   <testcase classname="engine.MoveCheckerTest" name="pawnsCannotJumpOverPieces" time="0"/>
   <testcase classname="engine.MoveCheckerTest" name="queensCannotMoveOverPiecesDiagonally" time="0"/>
   <testcase classname="engine.MoveCheckerTest" name="queensCannotMoveOverPieces" time="0"/>
-  <testcase classname="engine.MoveCheckerTest" name="bishopsCanMoveDiagonally" time="0"/>
+  <testcase classname="engine.MoveCheckerTest" name="bishopsCanMoveDiagonally" time="0.008"/>
   <testcase classname="engine.MoveCheckerTest" name="bishopsCannotMoveVerticallyOrHorizontally" time="0"/>
   <testcase classname="engine.MoveCheckerTest" name="rooksCannotMoveDiagonally" time="0"/>
   <testcase classname="engine.MoveCheckerTest" name="pawnsCanMoveDiagonallyWhenCapturing" time="0"/>

@@ -73,7 +73,7 @@ public class Minimax {
      * @param beta beta cutoff value. Infinity for initial call
      * @return the minimax value
      */
-    public int minimax(State state, boolean white, int depth, int alpha, int beta) {
+    private int minimax(State state, boolean white, int depth, int alpha, int beta) {
         if (depth == 0) {
             int value = state.evaluate();
             return value;

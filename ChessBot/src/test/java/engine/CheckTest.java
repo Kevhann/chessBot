@@ -6,16 +6,11 @@
 package engine;
 
 import chessboard.Chessboard;
-import engine.Check;
-import engine.MoveChecker;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
-import utils.*;
+import utils.Position;
 
 /**
  *
@@ -135,7 +130,7 @@ public class CheckTest {
         assertTrue(check.isChallenged(board.getBoard(), "h1", (byte) 1));
         assertFalse(check.isChallenged(board.getBoard(), "e7", (byte) 1));
     }
-    
+
     @Test
     public void bishopsChallengeCorrectly2() {
         board.addPiece((byte) 3, "a1");
@@ -213,5 +208,4 @@ public class CheckTest {
         assertFalse(check.isChallenged(board.getBoard(), "e6", (byte) -1));
         assertFalse(check.isChallenged(board.getBoard(), "b4", (byte) -1));
     }
-
 }
