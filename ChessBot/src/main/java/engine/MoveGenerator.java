@@ -60,7 +60,7 @@ public class MoveGenerator {
 
     /**
      * Generates all legal moves for a given state of the game
-     *
+     * @param state the state from which the moves are generated
      * @param side side of player
      * @return list of all legal moves
      */
@@ -80,21 +80,9 @@ public class MoveGenerator {
             }
         }
         return allStates;
-//        return removeStatesInCheck(allStates, side);
 
     }
 
-//    public CustomList<State> removeStatesInCheck(CustomList<State> allStates, byte side) {
-//        int size = allStates.size();
-//        for (int i = size - 1; i >= 0; i--) {
-//            State s = allStates.get(i);
-//
-//            if (check.isChallenged(state, side)) {
-//                allStates.remove(i);
-//            }
-//        }
-//        return allStates;
-//    }
 
     /**
      * Switch to the correct function based on the type of piece

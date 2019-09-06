@@ -62,7 +62,7 @@ public class MinimaxTest {
         assertEquals(4, next.getPiece(loc));
     }
 
-    @Test(timeout=5000)
+    @Test
     public void whiteWillFindMateInFive() {
         //8         ♜           ♚    
         //7                  ♘  ♟  ♟ 

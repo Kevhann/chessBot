@@ -17,10 +17,11 @@ public class MoveChecker {
     }
 
     /**
-     * Checks if the given move is valid.
-     * switches to the correct function depending on the piece to check
+     * Checks if the given move is valid. switches to the correct function
+     * depending on the piece to check
+     *
      * @param piecetype the type of piece from 1-6
-     * @param move the attempted move 
+     * @param move the attempted move
      * @param turn the turn to move
      * @return true for a legal move, false for an illegal one
      */
@@ -44,6 +45,13 @@ public class MoveChecker {
         }
     }
 
+    /**
+     * Check the move for case bishop
+     *
+     * @param move the move to test
+     * @param side 1 for white, -1 for black
+     * @return true if legal, false otherwise
+     */
     public boolean bishop(Move move, byte side) {
         int fromRank = move.getFromRank();
         int fromFile = move.getFromFile();
@@ -80,6 +88,13 @@ public class MoveChecker {
         return false;
     }
 
+    /**
+     * Check the move for case King
+     *
+     * @param move the move to test
+     * @param side 1 for white, -1 for black
+     * @return true if legal, false otherwise
+     */
     public boolean king(Move move, byte side) {
         int fromRank = move.getFromRank();
         int fromFile = move.getFromFile();
@@ -109,6 +124,13 @@ public class MoveChecker {
         return false;
     }
 
+    /**
+     * Check the move for case knight
+     *
+     * @param move the move to test
+     * @param side 1 for white, -1 for black
+     * @return true if legal, false otherwise
+     */
     public boolean knight(Move move, byte side) {
         int fromRank = move.getFromRank();
         int fromFile = move.getFromFile();
@@ -137,6 +159,13 @@ public class MoveChecker {
         return false;
     }
 
+    /**
+     * Check the move for case rook
+     *
+     * @param move the move to test
+     * @param side 1 for white, -1 for black
+     * @return true if legal, false otherwise
+     */
     public boolean rook(Move move, byte side) {
         int fromRank = move.getFromRank();
         int fromFile = move.getFromFile();
@@ -189,6 +218,13 @@ public class MoveChecker {
         return false;
     }
 
+    /**
+     * Check the move for case queen
+     *
+     * @param move the move to test
+     * @param side 1 for white, -1 for black
+     * @return true if legal, false otherwise
+     */
     public boolean queen(Move move, byte side) {
         int fromRank = move.getFromRank();
         int fromFile = move.getFromFile();
@@ -256,6 +292,13 @@ public class MoveChecker {
         return false;
     }
 
+    /**
+     * Check the move for case pawn
+     *
+     * @param move the move to test
+     * @param side 1 for white, -1 for black
+     * @return true if legal, false otherwise
+     */
     public boolean pawn(Move move, byte side) {
         int fromRank = move.getFromRank();
         int fromFile = move.getFromFile();

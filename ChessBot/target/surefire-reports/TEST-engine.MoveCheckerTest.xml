@@ -42,7 +42,7 @@
     <property name="java.class.path" value="/snap/netbeans/10/netbeans/java/maven/boot/plexus-classworlds-2.5.2.jar"/>
     <property name="java.vm.specification.version" value="11"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=/snap/netbeans/10/netbeans/java/maven-nblib/netbeans-eventspy.jar test"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=/snap/netbeans/10/netbeans/java/maven-nblib/netbeans-eventspy.jar package"/>
     <property name="java.home" value="/usr/lib/jvm/java-11-oracle"/>
     <property name="user.language" value="en"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
@@ -62,15 +62,15 @@
     <property name="sun.cpu.isalist" value=""/>
   </properties>
   <testcase classname="engine.MoveCheckerTest" name="rooksCanMoveHorizontally" time="0.001"/>
-  <testcase classname="engine.MoveCheckerTest" name="queensCanMoveVertically" time="0.001"/>
+  <testcase classname="engine.MoveCheckerTest" name="queensCanMoveVertically" time="0"/>
   <testcase classname="engine.MoveCheckerTest" name="knightsCanMoveOverPieces" time="0.001"/>
   <testcase classname="engine.MoveCheckerTest" name="queensCannotMoveIllegally" time="0"/>
-  <testcase classname="engine.MoveCheckerTest" name="bishopsCannotMoveOverPieces" time="0.001"/>
+  <testcase classname="engine.MoveCheckerTest" name="bishopsCannotMoveOverPieces" time="0"/>
   <testcase classname="engine.MoveCheckerTest" name="kingsCannotMoveOverOneSpace" time="0"/>
-  <testcase classname="engine.MoveCheckerTest" name="pawnsCanMoveTwoSquaresOnFirstMoveOnly" time="0.001"/>
-  <testcase classname="engine.MoveCheckerTest" name="queensCanMoveHorizontally" time="0"/>
-  <testcase classname="engine.MoveCheckerTest" name="rooksCannotMoveOverPieces" time="0.001"/>
-  <testcase classname="engine.MoveCheckerTest" name="pawnsCanMoveOnlyInCorrectDirection" time="0"/>
+  <testcase classname="engine.MoveCheckerTest" name="pawnsCanMoveTwoSquaresOnFirstMoveOnly" time="0"/>
+  <testcase classname="engine.MoveCheckerTest" name="queensCanMoveHorizontally" time="0.001"/>
+  <testcase classname="engine.MoveCheckerTest" name="rooksCannotMoveOverPieces" time="0"/>
+  <testcase classname="engine.MoveCheckerTest" name="pawnsCanMoveOnlyInCorrectDirection" time="0.002"/>
   <testcase classname="engine.MoveCheckerTest" name="pawnsCannotJumpOverPieces" time="0"/>
   <testcase classname="engine.MoveCheckerTest" name="queensCannotMoveOverPiecesDiagonally" time="0"/>
   <testcase classname="engine.MoveCheckerTest" name="queensCannotMoveOverPieces" time="0"/>
@@ -78,7 +78,7 @@
   <testcase classname="engine.MoveCheckerTest" name="bishopsCannotMoveVerticallyOrHorizontally" time="0"/>
   <testcase classname="engine.MoveCheckerTest" name="rooksCannotMoveDiagonally" time="0.001"/>
   <testcase classname="engine.MoveCheckerTest" name="pawnsCanMoveDiagonallyWhenCapturing" time="0"/>
-  <testcase classname="engine.MoveCheckerTest" name="queensCanMoveDiagonally" time="0.001"/>
+  <testcase classname="engine.MoveCheckerTest" name="queensCanMoveDiagonally" time="0"/>
   <testcase classname="engine.MoveCheckerTest" name="rooksCanMoveVertically" time="0"/>
-  <testcase classname="engine.MoveCheckerTest" name="kingsCanMoveOneSpace" time="0"/>
+  <testcase classname="engine.MoveCheckerTest" name="kingsCanMoveOneSpace" time="0.002"/>
 </testsuite>

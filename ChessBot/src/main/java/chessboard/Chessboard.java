@@ -126,8 +126,8 @@ public class Chessboard {
 
     /**
      *
-     * @param rank
-     * @param file
+     * @param rank the rank 0-7
+     * @param file the file 0-7
      * @return (+/-)1-6 for pieces, 0 for empty and out of bounds
      */
     public byte pieceOnBoard(int rank, int file) {
@@ -151,11 +151,18 @@ public class Chessboard {
         return board;
     }
 
+    /**
+     * 
+     * @return a clone of the board state
+     */
     public State getBoardState() {
         byte[] state = board.clone();
         return new State(state, whiteKing, blackKing);
     }
 
+    /**
+     * Clear the board of all pieces
+     */
     public void clearBoard() {
         board = new byte[64];
         this.whiteKing = new Position("e1");

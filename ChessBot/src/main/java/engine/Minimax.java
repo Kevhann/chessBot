@@ -18,7 +18,8 @@ public class Minimax {
     /**
      * Evaluates the best move using minimax to a given depth and returns it
      *
-     * @param depth
+     * @param depth the depth of the search, 0 for only next turn, ++ for deeper search
+     * @param side 1 for white, -1 for black
      * @return The best move evaluated with minimax
      */
     public State minimaxTurn(int depth, byte side) {

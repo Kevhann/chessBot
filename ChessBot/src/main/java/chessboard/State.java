@@ -136,6 +136,10 @@ public class State implements Comparable<State> {
         return score;
     }
     
+    /**
+     * @param side 1 for white, -1 for black
+     * @return the position of the king
+     */
     public Position kingPos(byte side) {
         if (side == 1) {
             return whiteKing;
@@ -149,6 +153,11 @@ public class State implements Comparable<State> {
         return evaluate() - s.evaluate();
     }
     
+    /**
+     * Set the position of the king
+     * @param side 1 for white, -1 for black
+     * @param pos the position on the board
+     */
     public void setKingPos(byte side, Position pos) {
         if (side == 1) {
             this.whiteKing = pos;

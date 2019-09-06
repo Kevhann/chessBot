@@ -1,13 +1,11 @@
 package testers;
 
 import chessboard.Chessboard;
-import chessboard.State;
 import engine.Minimax;
 import engine.MoveChecker;
 import engine.MoveGenerator;
 import java.util.Arrays;
 import java.util.Random;
-import structures.CustomList;
 import utils.Move;
 
 /**
@@ -67,6 +65,9 @@ public class EngineTester {
         System.out.println("Of the generated moves " + legal + " were legal, and " + illegal + " were illegal");
     }
 
+    /**
+     * Generate all legal moves and calculate the median time
+     */
     public void generateMovesAndGetMedian() {
         int n = 100000;
         long[] times = new long[n];
@@ -80,6 +81,9 @@ public class EngineTester {
         System.out.println("Median time to generate moves was: " + median + "ms");
     }
 
+    /**
+     * Calculate the best turn using minimax and return the median time
+     */
     public void minimaxTurnsDepthOne() {
         int n = 10000;
         long[] times = new long[n];
