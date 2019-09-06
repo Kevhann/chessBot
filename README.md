@@ -30,3 +30,5 @@
 | 3      | 16      | Laillisten siirtojen listaus, refaktorointia |
 | 4      | 12      | Minimax toteutus, refaktorointia, korjauksia |
 | 5      | 6       | Minimax testaus, oman tietorakenteen aloitus |
+| 6      | 5       | Testaus, dokumentaatio                       |
+| 7      | 4       | Dokumentaatio, loppuviilaus                  |
