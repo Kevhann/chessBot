@@ -6,9 +6,7 @@ chessboard/State.class
 engine/MoveGenerator.class
 utils/Position.class
 engine/MoveChecker.class
-chessboard/Chessboard$1.class
 testers/EngineTester.class
-utils/MoveType.class
 engine/Minimax.class
 utils/Move.class
 engine/Check.class

@@ -1,13 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package engine;
 
 import utils.Move;
-import engine.MoveChecker;
-import utils.*;
 import chessboard.*;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -61,16 +54,16 @@ public class MoveCheckerTest {
         Move illegalWhiteMove3 = new Move("g6,f6");
         Move illegalBlackMove3 = new Move("b3,a3");
 
-        assertEquals(MoveType.VALID, checker.pawn(legalWhiteMove, (byte) 1));
-        assertEquals(MoveType.VALID, checker.pawn(legalBlackMove, (byte) -1));
+        assertTrue(checker.pawn(legalWhiteMove, (byte) 1));
+        assertTrue(checker.pawn(legalBlackMove, (byte) -1));
 
-        assertEquals(MoveType.ILLEGAL, checker.pawn(illegalWhiteMove1, (byte) 1));
-        assertEquals(MoveType.ILLEGAL, checker.pawn(illegalBlackMove1, (byte) -1));
+        assertFalse(checker.pawn(illegalWhiteMove1, (byte) 1));
+        assertFalse(checker.pawn(illegalBlackMove1, (byte) -1));
 
-        assertEquals(MoveType.ILLEGAL, checker.pawn(illegalWhiteMove2, (byte) 1));
-        assertEquals(MoveType.ILLEGAL, checker.pawn(illegalBlackMove2, (byte) -1));
-        assertEquals(MoveType.ILLEGAL, checker.pawn(illegalWhiteMove3, (byte) 1));
-        assertEquals(MoveType.ILLEGAL, checker.pawn(illegalBlackMove3, (byte) -1));
+        assertFalse(checker.pawn(illegalWhiteMove2, (byte) 1));
+        assertFalse(checker.pawn(illegalBlackMove2, (byte) -1));
+        assertFalse(checker.pawn(illegalWhiteMove3, (byte) 1));
+        assertFalse(checker.pawn(illegalBlackMove3, (byte) -1));
     }
 
     @Test
@@ -80,11 +73,11 @@ public class MoveCheckerTest {
         Move bJump1 = new Move("b7,b5");
         Move bJump2 = new Move("b5,b3");
 
-        assertEquals(MoveType.VALID, checker.pawn(wJump1, (byte) 1));
-        assertEquals(MoveType.VALID, checker.pawn(bJump1, (byte) -1));
+        assertTrue(checker.pawn(wJump1, (byte) 1));
+        assertTrue(checker.pawn(bJump1, (byte) -1));
 
-        assertEquals(MoveType.ILLEGAL, checker.pawn(wJump2, (byte) 1));
-        assertEquals(MoveType.ILLEGAL, checker.pawn(bJump2, (byte) -1));
+        assertFalse(checker.pawn(wJump2, (byte) 1));
+        assertFalse(checker.pawn(bJump2, (byte) -1));
 
     }
 
@@ -97,8 +90,8 @@ public class MoveCheckerTest {
         board.addPiece((byte) 1, "b6");
         board.addPiece((byte) -1, "c4");
 
-        assertEquals(MoveType.CAPTURE, checker.pawn(whiteCaptures, (byte) 1));
-        assertEquals(MoveType.CAPTURE, checker.pawn(blackCaptures, (byte) -1));
+        assertTrue(checker.pawn(whiteCaptures, (byte) 1));
+        assertTrue(checker.pawn(blackCaptures, (byte) -1));
 
     }
     
@@ -111,8 +104,8 @@ public class MoveCheckerTest {
         board.addPiece((byte) 1, "b3");
         board.addPiece((byte) 1, "c6");
 
-        assertEquals(MoveType.ILLEGAL, checker.pawn(m1, (byte) 1));
-        assertEquals(MoveType.ILLEGAL, checker.pawn(m2, (byte) -1));
+        assertFalse(checker.pawn(m1, (byte) 1));
+        assertFalse(checker.pawn(m2, (byte) -1));
 
     }
 
@@ -121,8 +114,8 @@ public class MoveCheckerTest {
         Move h1 = new Move("a1,a8");
         Move h2 = new Move("b5,b1");
 
-        assertEquals(MoveType.VALID, checker.rook(h1, (byte) 1));
-        assertEquals(MoveType.VALID, checker.rook(h2, (byte) -1));
+        assertTrue(checker.rook(h1, (byte) 1));
+        assertTrue(checker.rook(h2, (byte) -1));
 
     }
 
@@ -131,8 +124,8 @@ public class MoveCheckerTest {
         Move v1 = new Move("a1,f1");
         Move v2 = new Move("g5,b5");
 
-        assertEquals(MoveType.VALID, checker.rook(v1, (byte) 1));
-        assertEquals(MoveType.VALID, checker.rook(v2, (byte) -1));
+        assertTrue(checker.rook(v1, (byte) 1));
+        assertTrue(checker.rook(v2, (byte) -1));
     }
 
     @Test
@@ -140,8 +133,8 @@ public class MoveCheckerTest {
         Move d1 = new Move("a1,c3");
         Move d2 = new Move("g5,b1");
 
-        assertEquals(MoveType.ILLEGAL, checker.rook(d1, (byte) 1));
-        assertEquals(MoveType.ILLEGAL, checker.rook(d2, (byte) -1));
+        assertFalse(checker.rook(d1, (byte) 1));
+        assertFalse(checker.rook(d2, (byte) -1));
     }
 
     @Test
@@ -151,8 +144,8 @@ public class MoveCheckerTest {
         board.addPiece((byte) 1, "d1");
         board.addPiece((byte) -1, "b4");
 
-        assertEquals(MoveType.ILLEGAL, checker.rook(j1, (byte) 1));
-        assertEquals(MoveType.ILLEGAL, checker.rook(j2, (byte) -1));
+        assertFalse(checker.rook(j1, (byte) 1));
+        assertFalse(checker.rook(j2, (byte) -1));
     }
 
     @Test
@@ -162,8 +155,8 @@ public class MoveCheckerTest {
         board.addPiece((byte) 1, "a2");
         board.addPiece((byte) -1, "b2");
 
-        assertEquals(MoveType.VALID, checker.knight(m1, (byte) 1));
-        assertEquals(MoveType.VALID, checker.knight(m2, (byte) -1));
+        assertTrue(checker.knight(m1, (byte) 1));
+        assertTrue(checker.knight(m2, (byte) -1));
     }
 
     @Test
@@ -171,8 +164,8 @@ public class MoveCheckerTest {
         Move m1 = new Move("a1,d4");
         Move m2 = new Move("h2,b8");
 
-        assertEquals(MoveType.VALID, checker.bishop(m1, (byte) 1));
-        assertEquals(MoveType.VALID, checker.bishop(m2, (byte) -1));
+        assertTrue(checker.bishop(m1, (byte) 1));
+        assertTrue(checker.bishop(m2, (byte) -1));
 
     }
 
@@ -181,8 +174,8 @@ public class MoveCheckerTest {
         Move m1 = new Move("a1,a3");
         Move m2 = new Move("c2,h2");
 
-        assertEquals(MoveType.ILLEGAL, checker.bishop(m1, (byte) 1));
-        assertEquals(MoveType.ILLEGAL, checker.bishop(m2, (byte) -1));
+        assertFalse(checker.bishop(m1, (byte) 1));
+        assertFalse(checker.bishop(m2, (byte) -1));
     }
 
     @Test
@@ -192,8 +185,8 @@ public class MoveCheckerTest {
         board.addPiece((byte) 1, "b2");
         board.addPiece((byte) -1, "b7");
 
-        assertEquals(MoveType.ILLEGAL, checker.bishop(m1, (byte) 1));
-        assertEquals(MoveType.ILLEGAL, checker.bishop(m2, (byte) -1));
+        assertFalse(checker.bishop(m1, (byte) 1));
+        assertFalse(checker.bishop(m2, (byte) -1));
     }
 
     @Test
@@ -201,8 +194,8 @@ public class MoveCheckerTest {
         Move h1 = new Move("a1,a8");
         Move h2 = new Move("b5,b1");
 
-        assertEquals(MoveType.VALID, checker.queen(h1, (byte) 1));
-        assertEquals(MoveType.VALID, checker.queen(h2, (byte) -1));
+        assertTrue(checker.queen(h1, (byte) 1));
+        assertTrue(checker.queen(h2, (byte) -1));
     }
 
     @Test
@@ -210,8 +203,8 @@ public class MoveCheckerTest {
         Move v1 = new Move("a1,f1");
         Move v2 = new Move("g5,b5");
 
-        assertEquals(MoveType.VALID, checker.queen(v1, (byte) 1));
-        assertEquals(MoveType.VALID, checker.queen(v2, (byte) -1));
+        assertTrue(checker.queen(v1, (byte) 1));
+        assertTrue(checker.queen(v2, (byte) -1));
     }
 
     @Test
@@ -221,8 +214,8 @@ public class MoveCheckerTest {
         board.addPiece((byte) 1, "d1");
         board.addPiece((byte) -1, "b4");
 
-        assertEquals(MoveType.ILLEGAL, checker.queen(j1, (byte) 1));
-        assertEquals(MoveType.ILLEGAL, checker.queen(j2, (byte) -1));
+        assertFalse(checker.queen(j1, (byte) 1));
+        assertFalse(checker.queen(j2, (byte) -1));
     }
 
     @Test
@@ -230,8 +223,8 @@ public class MoveCheckerTest {
         Move m1 = new Move("a1,d4");
         Move m2 = new Move("h2,b8");
 
-        assertEquals(MoveType.VALID, checker.queen(m1, (byte) 1));
-        assertEquals(MoveType.VALID, checker.queen(m2, (byte) -1));
+        assertTrue(checker.queen(m1, (byte) 1));
+        assertTrue(checker.queen(m2, (byte) -1));
     }
 
     @Test
@@ -242,8 +235,8 @@ public class MoveCheckerTest {
         board.addPiece((byte) 1, "b2");
         board.addPiece((byte) -1, "b7");
 
-        assertEquals(MoveType.ILLEGAL, checker.queen(m1, (byte) 1));
-        assertEquals(MoveType.ILLEGAL, checker.queen(m2, (byte) -1));
+        assertFalse(checker.queen(m1, (byte) 1));
+        assertFalse(checker.queen(m2, (byte) -1));
     }
 
     @Test
@@ -251,8 +244,8 @@ public class MoveCheckerTest {
         Move m1 = new Move("a1,d3");
         Move m2 = new Move("c7,a6");
 
-        assertEquals(MoveType.ILLEGAL, checker.queen(m1, (byte) 1));
-        assertEquals(MoveType.ILLEGAL, checker.queen(m2, (byte) -1));
+        assertFalse(checker.queen(m1, (byte) 1));
+        assertFalse(checker.queen(m2, (byte) -1));
     }
 
     @Test
@@ -260,8 +253,8 @@ public class MoveCheckerTest {
         Move m1 = new Move("a3,a1");
         Move m2 = new Move("c7,a7");
 
-        assertEquals(MoveType.ILLEGAL, checker.king(m1, (byte) 1));
-        assertEquals(MoveType.ILLEGAL, checker.king(m2, (byte) -1));
+        assertFalse(checker.king(m1, (byte) 1));
+        assertFalse(checker.king(m2, (byte) -1));
     }
 
     @Test
@@ -269,7 +262,7 @@ public class MoveCheckerTest {
         Move m1 = new Move("a1,b2");
         Move m2 = new Move("c7,b7");
 
-        assertEquals(MoveType.VALID, checker.king(m1, (byte) 1));
-        assertEquals(MoveType.VALID, checker.king(m2, (byte) -1));
+        assertTrue(checker.king(m1, (byte) 1));
+        assertTrue(checker.king(m2, (byte) -1));
     }
 }

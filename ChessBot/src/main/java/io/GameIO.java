@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package io;
 
 import engine.Check;
@@ -12,6 +7,7 @@ import chessboard.State;
 import engine.Minimax;
 import java.util.Scanner;
 import engine.MoveGenerator;
+import testers.EngineTester;
 
 /**
  *
@@ -30,6 +26,21 @@ public class GameIO {
     public Minimax minimax = new Minimax(gen);
     int depth = 4;
     int count = 1;
+
+    public void start() {
+        System.out.println("Choose to play game ('g') or to run performance tests ('t')");
+        String input = scanner.nextLine();
+        switch (input) {
+            case "g":
+                runGame();
+                break;
+            case "t":
+                test();
+                break;
+            default:
+                System.out.println("Goodbye");
+        }
+    }
 
     public void runGame() {
         board.addPieces();
@@ -51,7 +62,7 @@ public class GameIO {
                 gameMode3();
                 break;
             default:
-                System.out.println("Incorrect choice");
+                System.out.println("Goodbye");
         }
     }
 
@@ -230,6 +241,11 @@ public class GameIO {
             System.out.print(files[i]);
         }
         System.out.println("");
+    }
+
+    public static void test() {
+        EngineTester test = new EngineTester();
+        test.testAll();
     }
 
 }

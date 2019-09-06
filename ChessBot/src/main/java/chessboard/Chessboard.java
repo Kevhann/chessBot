@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package chessboard;
 
 import engine.Check;
 import utils.Move;
 import engine.MoveChecker;
-import utils.MoveType;
 import utils.Position;
 
 /**
@@ -78,7 +72,7 @@ public class Chessboard {
      *
      * @param move the move to attempt
      * @param turn the turn of the player, 1 for white, -1 for black
-     * @throws IllegalMoveException if the move is invalid
+     * @throws IllegalArgumentException if the move is invalid
      */
     public void move(Move move, byte turn) throws IllegalArgumentException {
         byte fromRank = move.getFromRank();
@@ -87,64 +81,33 @@ public class Chessboard {
         byte toFile = move.getToFile();
 
         byte currentPiece = board[(fromRank * 8) + fromFile];
-        int piecetype = currentPiece * turn;
+        byte piecetype = (byte) (currentPiece * turn);
         if (piecetype <= 0) {
             throw new IllegalArgumentException("Illegal move");
         }
 
-        MoveType moveType;
+        boolean legal = checker.checkAll(piecetype, move, turn);
 
-        switch (piecetype) {
-            case 1:
-                moveType = checker.king(move, turn);
-                break;
-            case 2:
-                moveType = checker.queen(move, turn);
-                break;
+        if (legal) {
 
-            case 3:
-                moveType = checker.bishop(move, turn);
-                break;
+            if (piecetype == 1) {
+                setKingPos(new Position(toRank, toFile), turn);
+            }
 
-            case 4:
-                moveType = checker.knight(move, turn);
-                break;
-
-            case 5:
-                moveType = checker.rook(move, turn);
-                break;
-
-            case 6:
-                moveType = checker.pawn(move, turn);
-                break;
-
-            default:
-                System.out.println("switch case default");
-                moveType = MoveType.ILLEGAL;
-        }
-        switch (moveType) {
-            case ENPASSANT:
-                //todo
-            case ILLEGAL:
-                throw new IllegalArgumentException("Unvalid Move");
-            default:
-
-                if (piecetype == 1) {
-                    setKingPos(new Position(toRank, toFile), turn);
-                }
-
-                if (check.isChallenged(board, getKingPos(turn), turn)) {
-                    throw new IllegalArgumentException("King cannot move");
-                } else {
-                    if (piecetype == 6) {
-                        if (toRank == 0 || toRank == 7) {
-                            board[(fromRank * 8) + fromFile] = 0;
-                            board[(toRank * 8) + toFile] = (byte) (2 * turn);
-                        }
+            if (check.isChallenged(board, getKingPos(turn), turn)) {
+                throw new IllegalArgumentException("King cannot move");
+            } else {
+                if (piecetype == 6) {
+                    if (toRank == 0 || toRank == 7) {
+                        board[(fromRank * 8) + fromFile] = 0;
+                        board[(toRank * 8) + toFile] = (byte) (2 * turn);
                     }
-                    board[(fromRank * 8) + fromFile] = 0;
-                    board[(toRank * 8) + toFile] = currentPiece;
                 }
+                board[(fromRank * 8) + fromFile] = 0;
+                board[(toRank * 8) + toFile] = currentPiece;
+            }
+        } else {
+            throw new IllegalArgumentException("Unvalid Move");
         }
     }
 

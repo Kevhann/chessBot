@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package engine;
 
 import chessboard.State;
 import structures.CustomList;
-import java.util.Collections;
-
 
 /**
  *
@@ -35,7 +28,8 @@ public class Minimax {
             return null;
         }
 
-//        Collections.shuffle(states);
+        states.shuffle();
+        
         int min = 99999;
         int mini = 0;
         int max = -99999;

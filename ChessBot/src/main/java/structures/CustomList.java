@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package structures;
 
-import java.util.Collections;
+import java.util.Random;
 
 /**
  * A simple list with some core functionality. Table is the array in which the
@@ -113,19 +108,37 @@ public class CustomList<Type> {
     public int getAbsoluteSize() {
         return absoluteSize;
     }
-    
+    /**
+     * Tests for empty list
+     * @return true for empty list, false otherwise
+     */
     public boolean isEmpty() {
         return length == 0;
     }
     
+    /**
+     * Adds a list of the same type together with the desired list.
+     * @param list list to be added
+     */
     public void addAll(CustomList<Type> list) {
         for (int i = 0; i < list.length(); i++) {
             add(list.get(i));
         }
     }
 
+    /**
+     * Shuffles the list by swapping two random elements.
+     * Does as many swaps as there are elements in the list
+     */
     public void shuffle() {
-        
+        Random random = new Random();
+        for (int i = 0; i < length; i++) {
+            int first = random.nextInt(length);
+            int second = random.nextInt(length);
+            Type temp = (Type) table[first];
+            table[first] = table[second];
+            table[second] = temp;
+        }
     }
 
 }

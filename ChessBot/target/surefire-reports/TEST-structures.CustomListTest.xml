@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="5" failures="0" name="structures.CustomListTest" time="0" errors="0" skipped="0">
+<testsuite tests="6" failures="0" name="structures.CustomListTest" time="0.001" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="11.0.2+9-LTS"/>
@@ -32,7 +32,7 @@
     <property name="java.class.version" value="55.0"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="os.version" value="4.15.0-55-generic"/>
+    <property name="os.version" value="4.15.0-58-generic"/>
     <property name="user.home" value="/home/kevin"/>
     <property name="user.timezone" value="Europe/Helsinki"/>
     <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
@@ -62,7 +62,8 @@
     <property name="sun.cpu.isalist" value=""/>
   </properties>
   <testcase classname="structures.CustomListTest" name="listCanBeAccessed" time="0"/>
-  <testcase classname="structures.CustomListTest" name="removingLast" time="0"/>
+  <testcase classname="structures.CustomListTest" name="removingLast" time="0.001"/>
+  <testcase classname="structures.CustomListTest" name="addTwoListsTogether" time="0"/>
   <testcase classname="structures.CustomListTest" name="listGrowsDynamically" time="0"/>
   <testcase classname="structures.CustomListTest" name="listCanBeAdded" time="0"/>
   <testcase classname="structures.CustomListTest" name="listWorksWithStrings" time="0"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="16" failures="0" name="engine.CheckTest" time="0" errors="0" skipped="0">
+<testsuite tests="16" failures="0" name="engine.CheckTest" time="0.01" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="11.0.2+9-LTS"/>
@@ -32,7 +32,7 @@
     <property name="java.class.version" value="55.0"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="os.version" value="4.15.0-55-generic"/>
+    <property name="os.version" value="4.15.0-58-generic"/>
     <property name="user.home" value="/home/kevin"/>
     <property name="user.timezone" value="Europe/Helsinki"/>
     <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
@@ -67,14 +67,14 @@
   <testcase classname="engine.CheckTest" name="bishopsChallengeCorrectly2" time="0"/>
   <testcase classname="engine.CheckTest" name="returnsFalseWithEmptyBoard" time="0"/>
   <testcase classname="engine.CheckTest" name="queensChallengeCorrectly1" time="0"/>
-  <testcase classname="engine.CheckTest" name="queensChallengeCorrectly2" time="0"/>
+  <testcase classname="engine.CheckTest" name="queensChallengeCorrectly2" time="0.006"/>
   <testcase classname="engine.CheckTest" name="whitePawnsChallengeCorrectly" time="0"/>
   <testcase classname="engine.CheckTest" name="pawnsDontChallengeSameColour" time="0"/>
   <testcase classname="engine.CheckTest" name="blackPawnsChallengeCorrectly" time="0"/>
   <testcase classname="engine.CheckTest" name="rooksCannotChallengeThroughPieces" time="0"/>
-  <testcase classname="engine.CheckTest" name="knightsChallengeCorrectly" time="0"/>
+  <testcase classname="engine.CheckTest" name="knightsChallengeCorrectly" time="0.001"/>
   <testcase classname="engine.CheckTest" name="bishopsCannotChallengeThroughPieces" time="0"/>
   <testcase classname="engine.CheckTest" name="kingChallengesCorrectly" time="0"/>
-  <testcase classname="engine.CheckTest" name="queensCannotChallengeThroughPieces1" time="0"/>
-  <testcase classname="engine.CheckTest" name="queensCannotChallengeThroughPieces2" time="0"/>
+  <testcase classname="engine.CheckTest" name="queensCannotChallengeThroughPieces1" time="0.001"/>
+  <testcase classname="engine.CheckTest" name="queensCannotChallengeThroughPieces2" time="0.002"/>
 </testsuite>

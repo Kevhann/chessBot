@@ -70,12 +70,13 @@ public class CustomListTest {
             list.add(i);
         }
         assertEquals(40, list.getAbsoluteSize());
-        
+
         for (int i = 0; i < 30; i++) {
             int temp = list.get(i);
             assertEquals(i, temp);
         }
     }
+
     @Test
     public void removingLast() {
         CustomList<Integer> list = new CustomList<>();
@@ -85,10 +86,23 @@ public class CustomListTest {
         list.add(40);
         int last = list.get(list.length() - 1);
         assertEquals(40, last);
-        
+
         list.removeLast();
-        
+
         last = list.get(list.length() - 1);
         assertEquals(30, last);
+    }
+
+    @Test
+    public void addTwoListsTogether() {
+        CustomList<Integer> first = new CustomList<>();
+        CustomList<Integer> second = new CustomList<>();
+        for (int i = 0; i < 15; i++) {
+            first.add(i);
+            second.add(i);
+        }
+        first.addAll(second);
+        assertEquals(30, first.length());
+
     }
 }
