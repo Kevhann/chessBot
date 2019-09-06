@@ -1,5 +1,6 @@
 # chessBot
 
+
 [Määrittelydokumentti](/dokumentaatio/maarittelydokumentti.md)
 
 [Testausdokumentti](/dokumentaatio/testausdokumentti.md)
@@ -7,6 +8,8 @@
 [Käyttöohje](/dokumentaatio/kayttoohje.md)
 
 [Toteutusdokumentti](/dokumentaatio/toteutusdokumentti.md)
+
+[Loppupalautus](https://github.com/Kevhann/chessBot/releases/tag/1.0)
 
 [Viikkoraportti 5](/dokumentaatio/viikkoraportti_5.md)
 
