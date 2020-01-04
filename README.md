@@ -1,5 +1,11 @@
 # chessBot
 
+Chessbot on itse rakennettu versio perinteisestä shakista, joka toimii tekstikäyttöliittymällä. Pelissä on mahdollista pelata joko toista pelaajaa, tai kehittämääni tekoälyä vastaan.
+
+Tavallisesta shakista poikkeavasti: 
+* Linnoittautuminen ei ole mahdollista
+* [En passant](https://en.wikipedia.org/wiki/En_passant) ei ole mahdollista
+* Sotilas ylentyy aina kuningattareksi
 
 [Määrittelydokumentti](/dokumentaatio/maarittelydokumentti.md)
 
